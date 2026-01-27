@@ -1,6 +1,5 @@
 import React from 'react'
 import './Sidebar.css'
-// Usando ícones da Phosphor Icons (Pi) que têm um traço mais moderno
 import { PiSquaresFourBold, PiCalendarBlankBold, PiWalletBold } from "react-icons/pi";
 
 const Sidebar = ({ user }) => {
@@ -26,12 +25,12 @@ const Sidebar = ({ user }) => {
           <span>Dashboard</span>
         </div>
         <div className="nav-item">
-          <PiCalendarBlankBold className="nav-icon" />
-          <span>Calendário</span>
-        </div>
-        <div className="nav-item">
           <PiWalletBold className="nav-icon" />
           <span>Financeiro</span>
+        </div>
+        <div className="nav-item">
+          <PiCalendarBlankBold className="nav-icon" />
+          <span>Calendário</span>
         </div>
       </nav>
 

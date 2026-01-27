@@ -1,18 +1,18 @@
 import React from "react";
 import "./Dashboard.css";
 import DateWidget from "../../components/UI/DateWidget/DateWidget";
+import WelcomeWidget from "../../components/UI/WelcomeWidget/WelcomeWidget";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => { // Recebe o user aqui
   return (
     <div className="dashboard-wrapper">
       <header className="cabecalho-principal">
         
-        {/* Lado do Nome/Sistema */}
         <div className="secao-usuario">
-           {/* Futuro componente de Boas-vindas */}
+           {/* Passamos o user para o widget */}
+           <WelcomeWidget user={user} />
         </div>
 
-        {/* Lado das Ferramentas/Widgets */}
         <div className="secao-widgets">
           <DateWidget />
         </div>
@@ -20,7 +20,7 @@ const Dashboard = () => {
       </header>
 
       <main className="area-conteudo-central">
-        {/* Tudo o que você adicionar vai aqui dentro */}
+        {/* Espaço Livre */}
       </main>
     </div>
   );

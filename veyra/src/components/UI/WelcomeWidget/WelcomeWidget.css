@@ -1,0 +1,39 @@
+.container-saudacao {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  animation: fadeIn 0.8s ease;
+}
+
+.tag-sistema {
+  color: #6366f1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.texto-boas-vindas {
+  font-size: 42px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.nome-destaque {
+  color: #a5b4fc;
+}
+
+.subtexto-status {
+  color: #71717a;
+  font-size: 15px;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
