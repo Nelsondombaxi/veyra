@@ -1,53 +1,58 @@
-/* App.css */
+/* App.css - Estilos Globais e Layout */
+
+/* 1. Variáveis Globais (Paleta de Cores "Veyra System") */
+:root {
+  --bg-dark: #09090b;       /* Fundo quase preto (Deep Zinc) */
+  --bg-card: #18181b;       /* Fundo para cards e sidebar */
+  --primary: #8b5cf6;       /* Roxo Principal */
+  --primary-glow: rgba(139, 92, 246, 0.5);
+  --text-main: #ffffff;     /* Branco puro */
+  --text-muted: #a1a1aa;    /* Cinza para textos secundários */
+  --border-subtle: rgba(255, 255, 255, 0.06); /* Bordas finas */
+}
+
+/* 2. Reset Básico */
+* {
+  box-sizing: border-box; /* Garante que padding não estoure o tamanho */
+}
+
 body, html, #root {
   margin: 0;
   padding: 0;
+  width: 100%;
   height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5f5; /* ou branco se quiser */
+  font-family: 'Inter', 'Segoe UI', sans-serif; /* Fonte limpa */
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden; /* Evita rolagem lateral indesejada */
 }
 
+/* 3. O Layout Principal */
 .App {
-  height: 100%;
+  display: flex; 
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
+/* 4. Área do Conteúdo */
+.main-content-wrapper {
+  flex: 1; /* Ocupa AUTOMATICAMENTE todo o espaço após a sidebar */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  min-width: 0; /* Previne que conteúdos internos grandes "estourem" a largura */
 }
-
-#root {
-  width: 100%;
-  min-height: 100vh;
+/* Se quiser barras de rolagem bonitas (Estilo Mac/Dark) */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-.App {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #09090b;
-  color: #ffffff;
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
 }
-
-.dashboard-temp header h1 {
-  font-size: 32px;
-  margin-top: 8px;
-  font-weight: 700;
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
 }
-
-.dashboard-temp header span {
-  color: #6B46C1;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.stats-grid-placeholder {
-  margin-top: 30px;
-}
-
-.stat-card {
-  background: #131316;
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #a1a1aa;
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
 }

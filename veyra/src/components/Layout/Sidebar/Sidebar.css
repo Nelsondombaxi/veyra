@@ -1,80 +1,125 @@
 .veyra-sidebar {
   width: 260px;
   height: 100vh;
-  background-color: #131316;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #0d0d0f; /* Tom mais profundo e profissional */
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  padding: 24px;
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 100;
 }
 
-.sidebar-logo h2 {
-  color: #6B46C1;
-  font-size: 22px;
-  letter-spacing: 2px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.sidebar-nav {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.nav-item {
-  padding: 12px 16px;
-  color: #a1a1aa;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.nav-item:hover {
-  background: rgba(107, 70, 193, 0.1);
-  color: #fff;
-}
-
-.nav-item.active {
-  background: #6B46C1;
-  color: #fff;
-}
-
-.sidebar-profile {
+/* Header de Perfil */
+.sidebar-profile-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 0;
+  margin-bottom: 20px;
+}
+
+.avatar-container {
+  position: relative;
+  display: flex;
 }
 
 .mini-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px; /* Squircle (quadrado arredondado) em vez de círculo */
   object-fit: cover;
-  border: 2px solid #6B46C1;
+  border: 1.5px solid rgba(107, 70, 193, 0.3);
 }
 
-.user-info {
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: #10b981; /* Verde online */
+  border: 2px solid #0d0d0f;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+}
+
+.user-details {
   display: flex;
   flex-direction: column;
 }
 
-.user-info span {
-  color: #fff;
+.user-name {
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
 }
 
-.user-info small {
+.user-role {
   color: #71717a;
   font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 30px;
+}
+
+/* Navegação */
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  color: #a1a1aa;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.nav-icon {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.nav-item:hover .nav-icon {
+  transform: translateX(3px);
+}
+
+.nav-item.active {
+  background: rgba(107, 70, 193, 0.15);
+  color: #9f7aea;
+  font-weight: 600;
+}
+
+/* Logo no Rodapé */
+.sidebar-footer {
+  padding-top: 20px;
+}
+
+.brand-logo {
+  color: #6B46C1;
+  font-size: 18px;
+  letter-spacing: 4px;
+  font-weight: 900;
+  opacity: 0.4;
+  text-align: center;
 }
