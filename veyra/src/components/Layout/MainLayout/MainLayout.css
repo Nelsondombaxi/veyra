@@ -1,0 +1,11 @@
+.main-layout {
+  display: flex;
+  background-color: #09090b; /* Fundo principal mais escuro que a sidebar */
+  min-height: 100vh;
+}
+
+.content-area {
+  margin-left: 260px; /* Largura da sidebar */
+  flex: 1;
+  padding: 40px;
+}
