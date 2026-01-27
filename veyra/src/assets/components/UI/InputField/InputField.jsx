@@ -1,7 +1,7 @@
 import React from 'react'
 import './InputField.css'
 
-const InputField = ({ label, placeholder, type = 'text' }) => {
+const InputField = ({ label, placeholder, type = 'text', value, onChange }) => {
   const inputId = `input-${label.toLowerCase().replace(/\s/g, '-')}`;
 
   return (
@@ -14,6 +14,8 @@ const InputField = ({ label, placeholder, type = 'text' }) => {
         className="input-field" 
         type={type} 
         placeholder={placeholder} 
+        value={value}
+        onChange={onChange}
         autoComplete="off"
       />
     </div>
