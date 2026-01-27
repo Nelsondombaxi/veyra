@@ -3,33 +3,24 @@ import './App.css'
 import FirstAccess from "./pages/FirstAccess/FirstAccess.jsx"
 import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx"
 import Dashboard from "./pages/Dashboard/Dashboard.jsx"
+import Projects from "./pages/Projects/Projects.jsx" 
 import StartScreen from "./components/StartScreen/StartScreen.jsx"
 
 function App() {
-  // Determine if there is an existing saved user in localStorage (pre-existing access)
   const saved = typeof window !== 'undefined' ? localStorage.getItem('veyra_user') : null
   const [user, setUser] = useState(() => (saved ? JSON.parse(saved) : null))
-
-  // Show the start screen only when the app loaded a saved user from localStorage
+  
+  // Estado que controla a navegação
+  const [activeTab, setActiveTab] = useState('dashboard')
   const [showStart, setShowStart] = useState(() => !!saved)
   const [canCreateAnother, setCanCreateAnother] = useState(() => !!saved)
 
   const handleLogin = (u) => {
-    // Called when a user is created via FirstAccess/ProfileModal.
-    // For newly created users in the same session we go directly to the Dashboard (no start screen).
     setUser(u)
     setShowStart(false)
-    setCanCreateAnother(!!localStorage.getItem('veyra_user'))
   }
 
   const handleStart = () => setShowStart(false)
-
-  const handleCreateAnother = () => {
-    localStorage.removeItem('veyra_user')
-    setUser(null)
-    setShowStart(false)
-    setCanCreateAnother(false)
-  }
 
   if (!user) {
     return (
@@ -41,15 +32,28 @@ function App() {
 
   return (
     <div className="App">
-      <MainLayout user={user}>
+      <MainLayout 
+        user={user} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab}
+      >
         {showStart ? (
-          <StartScreen user={user} onStart={handleStart} onCreateAnother={handleCreateAnother} canCreateAnother={canCreateAnother} />
+          <StartScreen 
+            user={user} 
+            onStart={handleStart} 
+            onCreateAnother={() => {}} 
+            canCreateAnother={canCreateAnother} 
+          />
         ) : (
-          <Dashboard user={user} />
+          <>
+            {/* Troca de conteúdo dinâmica */}
+            {activeTab === 'dashboard' && <Dashboard user={user} />}
+            {activeTab === 'projetos' && <Projects />}
+          </>
         )}
       </MainLayout>
     </div>
   )
 }
 
-export default App
+export default App;

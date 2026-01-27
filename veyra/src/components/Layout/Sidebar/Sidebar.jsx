@@ -1,11 +1,15 @@
 import React from 'react'
 import './Sidebar.css'
-import { PiSquaresFourBold, PiCalendarBlankBold, PiWalletBold } from "react-icons/pi";
+import { 
+  PiSquaresFourBold, 
+  PiCalendarBlankBold, 
+  PiWalletBold, 
+  PiListChecksBold
+} from "react-icons/pi";
 
-const Sidebar = ({ user }) => {
+const Sidebar = ({ user, activeTab, setActiveTab }) => {
   return (
     <aside className="veyra-sidebar">
-      {/* Perfil no topo para melhor visibilidade */}
       <div className="sidebar-profile-header">
         <div className="avatar-container">
           <img src={user?.avatar} alt="User" className="mini-avatar" />
@@ -20,15 +24,30 @@ const Sidebar = ({ user }) => {
       <div className="sidebar-divider"></div>
 
       <nav className="sidebar-nav">
-        <div className="nav-item active">
+        {/* Clique na Dashboard */}
+        <div 
+          className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+          onClick={() => setActiveTab('dashboard')}
+        >
           <PiSquaresFourBold className="nav-icon" />
           <span>Dashboard</span>
         </div>
-        <div className="nav-item">
+
+        {/* Clique em Projetos */}
+        <div 
+          className={`nav-item ${activeTab === 'projetos' ? 'active' : ''}`}
+          onClick={() => setActiveTab('projetos')}
+        >
+          <PiListChecksBold className="nav-icon" />
+          <span>Projetos</span>
+        </div>
+
+        <div className="nav-item" onClick={() => setActiveTab('financeiro')}>
           <PiWalletBold className="nav-icon" />
           <span>Financeiro</span>
         </div>
-        <div className="nav-item">
+        
+        <div className="nav-item" onClick={() => setActiveTab('calendario')}>
           <PiCalendarBlankBold className="nav-icon" />
           <span>Calendário</span>
         </div>
@@ -41,4 +60,4 @@ const Sidebar = ({ user }) => {
   )
 }
 
-export default Sidebar
+export default Sidebar;

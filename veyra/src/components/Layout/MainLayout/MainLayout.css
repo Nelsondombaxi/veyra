@@ -1,11 +1,13 @@
-.main-layout {
+.main-layout-container {
   display: flex;
-  background-color: #09090b; /* Fundo principal mais escuro que a sidebar */
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  background-color: #080404;
+  overflow: hidden;
 }
 
-.content-area {
-  margin-left: 260px; /* Largura da sidebar */
+.content-viewport {
   flex: 1;
-  padding: 40px;
+  height: 100%;
+  overflow-y: auto;
 }
