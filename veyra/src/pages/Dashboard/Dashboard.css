@@ -22,9 +22,8 @@
 
 .secao-widgets {
   display: flex;
-  align-items: center;
+  margin-top: -60px;
 }
-
 .area-conteudo-central {
   flex: 1;
   width: 100%;
