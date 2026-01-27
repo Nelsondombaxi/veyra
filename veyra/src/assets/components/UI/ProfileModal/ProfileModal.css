@@ -1,0 +1,72 @@
+.profile-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: #131316;
+  padding: 48px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 440px;
+  
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 40px rgba(107, 70, 193, 0.1);
+    
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #6B46C1, #9F7AEA);
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff; /* Texto branco puro para contraste */
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-size: 15px;
+  color: #a1a1aa; /* Cinza metálico para subtítulos */
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Ajuste para inputs ficarem bonitos no fundo escuro */
+/* Isso força os inputs dentro do modal a terem estilo dark */
+.profile-modal input {
+  background-color: #1c1c21 !important;
+  border-color: #333 !important;
+  color: #fff !important;
+}
+
+.profile-modal input:focus {
+  border-color: #6B46C1 !important;
+  background-color: #23232a !important;
+}
+
+.profile-modal label {
+  color: #d4d4d8 !important; /* Label cinza claro */
+}

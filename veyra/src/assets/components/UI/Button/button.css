@@ -1,0 +1,26 @@
+.veyra-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background-color: #6B46C1;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(107, 70, 193, 0.2);
+}
+
+.veyra-button:hover {
+  background-color: #553c9a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(107, 70, 193, 0.3);
+}
+
+.veyra-button:active {
+  transform: translateY(1px);
+  background-color: #44337a;
+  box-shadow: 0 2px 6px rgba(107, 70, 193, 0.2);
+}

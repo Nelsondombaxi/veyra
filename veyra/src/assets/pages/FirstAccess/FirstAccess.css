@@ -1,0 +1,8 @@
+.first-access-page {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
