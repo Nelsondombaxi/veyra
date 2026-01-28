@@ -10,7 +10,6 @@ function App() {
   const saved = typeof window !== 'undefined' ? localStorage.getItem('veyra_user') : null
   const [user, setUser] = useState(() => (saved ? JSON.parse(saved) : null))
   
-  // Estado que controla a navegação
   const [activeTab, setActiveTab] = useState('dashboard')
   const [showStart, setShowStart] = useState(() => !!saved)
   const [canCreateAnother, setCanCreateAnother] = useState(() => !!saved)

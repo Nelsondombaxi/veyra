@@ -1,0 +1,36 @@
+.veyra-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  color: #71717a;
+  font-size: 18px;
+}
+
+.veyra-search-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 16px 12px 48px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.veyra-search-input:focus {
+  border-color: #6B46C1;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 4px rgba(107, 70, 193, 0.1);
+}
+
+.veyra-search-input::placeholder {
+  color: #52525b;
+}

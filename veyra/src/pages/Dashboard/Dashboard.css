@@ -17,13 +17,11 @@
 .secao-usuario {
   display: flex;
   flex-direction: column;
-  /* Removido o margin-top negativo para evitar que o texto suma no topo */
 }
 
 .secao-widgets {
   display: flex;
   align-items: flex-start;
-  /* Removido o margin-top negativo para manter o alinhamento natural */
 }
 
 .area-conteudo-central {
