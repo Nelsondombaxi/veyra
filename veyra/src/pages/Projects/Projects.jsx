@@ -28,9 +28,23 @@ const Projects = () => {
     setProjects(projects.filter(p => p.id !== id));
   };
 
+  const filterMap = {
+    'Todos': 'todos',
+    'Metas': 'metas',
+    'Tarefas': 'tarefas',
+    'Treinos': 'treino',
+    'Objetivos': 'objetivo'
+  };
+
   const filteredProjects = projects.filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeFilter === 'Todos' || project.category.toLowerCase() === activeFilter.toLowerCase().replace('s', ''); 
+    
+    const targetCategory = filterMap[activeFilter];
+    
+    const matchesCategory = 
+      activeFilter === 'Todos' || 
+      project.category.toLowerCase() === targetCategory; 
+
     return matchesSearch && matchesCategory;
   });
 
@@ -64,7 +78,7 @@ const Projects = () => {
           </div>
         ) : (
           <div className="empty-state">
-            <p>Nenhum card encontrado. Comece adicionando um novo objetivo!</p>
+            <p>Nenhum card encontrado em "{activeFilter}".</p>
           </div>
         )}
       </main>
