@@ -1,0 +1,112 @@
+.project-card {
+  background: linear-gradient(
+    145deg, 
+    var(--card-color-glow) 0%, 
+    rgba(13, 13, 15, 1) 100%
+  );
+  border: 1.5px solid var(--card-color);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px var(--card-color-glow);
+  filter: brightness(1.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--card-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin: 10px 0 5px 0;
+  line-height: 1.4;
+}
+
+.card-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.category-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--card-color);
+  font-weight: 800;
+  opacity: 0.8;
+}
+
+.delete-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #71717a;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.priority-star {
+  color: #fbbf24;
+  font-size: 18px;
+}
+
+.priority-border {
+  box-shadow: 0 0 15px var(--card-color-glow);
+}

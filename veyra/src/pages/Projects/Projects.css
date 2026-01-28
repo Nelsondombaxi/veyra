@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  width: 100%;
+  width: 90%;
 }
 
 .projects-grid-container {
@@ -35,4 +35,17 @@
   color: #52525b;
   border: 2px dashed rgba(255, 255, 255, 0.03);
   border-radius: 20px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.projects-grid-container {
+  flex: 1;
+  width: 100%;
+  margin-top: 20px;
 }
