@@ -5,8 +5,22 @@ import DateWidget from "../../components/UI/DateWidget/DateWidget";
 import WelcomeWidget from "../../components/UI/WelcomeWidget/WelcomeWidget";
 import Showcase from "../../components/UI/Showcase/Showcase";
 import AutoCarousel from "../../components/UI/AutoCarousel/AutoCarousel";
+import CreditCard from "../../components/UI/CreditCard/CreditCard"; 
 
 const Dashboard = ({ user }) => {
+  const [financialData, setFinancialData] = useState(() => {
+    const saved = localStorage.getItem("@veyra:finance");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return {
+        balance: parsed.balance,
+        bankName: parsed.cardInfo?.bankName,
+        holderName: parsed.cardInfo?.holderName
+      };
+    }
+    return { balance: 0, bankName: "VEYRA BANK", holderName: "NELSON DOMBAXI" };
+  });
+
   const [priorityProjects, setPriorityProjects] = useState(() => {
     const saved = localStorage.getItem('@veyra:projects');
     if (saved) {
@@ -16,12 +30,37 @@ const Dashboard = ({ user }) => {
     return [];
   });
 
-  useEffect(() => {
-    const saved = localStorage.getItem('@veyra:projects');
+  const loadFinancialData = () => {
+    const saved = localStorage.getItem("@veyra:finance");
     if (saved) {
-      const allProjects = JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      setFinancialData({
+        balance: parsed.balance,
+        bankName: parsed.cardInfo?.bankName,
+        holderName: parsed.cardInfo?.holderName
+      });
+    }
+  };
+
+  useEffect(() => {
+    loadFinancialData();
+
+    const handleStorageChange = (e) => {
+      // Escuta a chave correta
+      if (e.key === "@veyra:finance") {
+        loadFinancialData();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    const savedProjects = localStorage.getItem('@veyra:projects');
+    if (savedProjects) {
+      const allProjects = JSON.parse(savedProjects);
       setPriorityProjects(allProjects.filter(p => p.isPriority === true));
     }
+
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   return (
@@ -41,8 +80,15 @@ const Dashboard = ({ user }) => {
         </Showcase>
 
         <Showcase title="Financeiro" icon={FiDollarSign}>
-          <div className="empty-placeholder-dash">
-            <p>Nenhum dado financeiro disponível.</p>
+          <div className="dash-finance-center">
+            {/* Passando os dados na estrutura que o seu CreditCard espera */}
+            <CreditCard 
+              balance={financialData.balance} 
+              cardInfo={{
+                bankName: financialData.bankName,
+                holderName: financialData.holderName
+              }} 
+            />
           </div>
         </Showcase>
 

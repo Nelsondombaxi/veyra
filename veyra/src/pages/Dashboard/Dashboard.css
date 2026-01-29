@@ -34,6 +34,23 @@
   gap: 32px; 
 }
 
+/* --- ESTILO DO FINANCEIRO CENTRALIZADO --- */
+.dash-finance-center {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;
+  padding: 40px 0; /* Espaçamento para o cartão respirar */
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 24px;
+}
+
+/* Garante que o cartão mantenha a proporção de elite */
+.dash-finance-center .mastercard-black-card {
+  transform: scale(1); /* Proporção original igual à tela financeira */
+  margin: 0 auto;
+}
+
 .empty-placeholder-dash {
   background: rgba(255, 255, 255, 0.02);
   border: 1px dashed rgba(255, 255, 255, 0.1);
@@ -58,10 +75,6 @@
   border-color: rgba(107, 70, 193, 0.2);
 }
 
-.area-conteudo-central .carousel-container {
-  margin-top: 10px;
-}
-
 @media (max-width: 1024px) {
   .dashboard-wrapper {
     padding: 30px 40px;
@@ -70,5 +83,10 @@
   .cabecalho-principal {
     flex-direction: column;
     gap: 20px;
+  }
+
+  /* Ajuste de escala para telas menores */
+  .dash-finance-center .mastercard-black-card {
+    transform: scale(0.9);
   }
 }
