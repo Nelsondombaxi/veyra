@@ -1,0 +1,128 @@
+.mastercard-black-card {
+  width: 100%;
+  max-width: 400px;
+  height: 240px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); /* Preto Sólido/Profundo */
+  border-radius: 20px;
+  padding: 25px;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil para definir o shape */
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* Efeito de textura fosca */
+.mastercard-black-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.bank-name {
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  color: #e2e2e2;
+  text-transform: uppercase;
+}
+
+/* O CHIP DOURADO */
+.card-chip {
+  width: 45px;
+  height: 35px;
+  background: linear-gradient(135deg, #d4af37 0%, #f9d976 50%, #b8860b 100%);
+  border-radius: 6px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  padding: 5px;
+}
+
+.chip-line {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+/* SEÇÃO DE SALDO */
+.card-balance-section {
+  margin-top: 10px;
+}
+
+.balance-label {
+  font-size: 0.65rem;
+  color: #888;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+
+.balance-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* RODAPÉ DO CARTÃO */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 25px;
+}
+
+.holder-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.holder-label {
+  font-size: 0.55rem;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.holder-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* LOGO MASTERCARD ORIGINAL */
+.mastercard-logo {
+  display: flex;
+  position: relative;
+  width: 50px;
+  height: 30px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.red {
+  background: #eb001b;
+  position: absolute;
+  left: 0;
+}
+
+.orange {
+  background: #f79e1b;
+  position: absolute;
+  right: 0;
+  opacity: 0.9;
+}

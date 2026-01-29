@@ -1,0 +1,269 @@
+.wishlist-section { width: 100%; max-width: 1000px; margin: 0px auto; padding: 20px; }
+
+.wishlist-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 50px; }
+
+.section-label { color: #6B46C1; font-weight: 900; letter-spacing: 4px; font-size: 0.75rem; margin-bottom: 10px; }
+
+.header-info h2 { font-size: 2.5rem; color: #fff; margin-bottom: 5px; }
+.header-info p { color: #71717a; margin-bottom: 30px; }
+
+.btn-add-trigger { background: #6B46C1; color: #fff; border: none; padding: 14px 30px; border-radius: 16px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+.btn-add-trigger:hover { background: #805ad5; transform: scale(1.05); }
+
+/* --- LOGO BOX --- */
+.premium-logo-box {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1a1a1e, #121214);
+  border-radius: 24px;
+  border: 1px solid rgba(107, 70, 193, 0.3); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+}
+
+.premium-logo-box:hover {
+  transform: translateY(-5px) rotate(3deg);
+  border-color: #6B46C1;
+  box-shadow: 0 15px 40px rgba(107, 70, 193, 0.2);
+}
+
+.logo-glow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #6B46C1;
+  filter: blur(35px);
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.main-logo-icon {
+  font-size: 2.8rem;
+  color: #fff; 
+  filter: drop-shadow(0 0 10px rgba(107, 70, 193, 0.8));
+  z-index: 2;
+}
+
+/* --- LISTA E TABELA (CORRIGIDA) --- */
+.wishlist-table { 
+  background: #121214; 
+  border: 1px solid #27272a; 
+  border-radius: 10px; 
+  overflow: hidden; 
+}
+
+.table-head { 
+  display: flex; 
+  justify-content: space-between; 
+  padding: 20px 35px; 
+  background: rgba(255,255,255,0.02); 
+  color: #52525b; 
+  font-size: 0.75rem; 
+  font-weight: 900; 
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+}
+
+.list-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 20px 35px; 
+  border-bottom: 1px solid rgba(255,255,255,0.03); 
+  transition: background 0.2s;
+}
+
+.list-row:hover {
+  background: rgba(255,255,255,0.01);
+}
+
+/* Container do Ícone + Nome (Alinhamento corrigido) */
+.row-main {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espaço entre a bolinha e o nome */
+  cursor: pointer;
+  flex: 1;
+}
+
+.status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #71717a;
+}
+
+.status-icon .done {
+  color: #22c55e;
+}
+
+.name { 
+  color: #e4e4e7; 
+  font-size: 1.15rem; 
+  font-weight: 500; 
+  margin: 0; /* Removi a margem que estava desalinhando */
+  transition: all 0.3s;
+}
+
+/* Efeito de Concluído (Risco) */
+.list-row.is-done .name {
+  text-decoration: line-through;
+  color: #52525b;
+  opacity: 0.7;
+}
+
+.list-row.is-done .price {
+  opacity: 0.5;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.price { color: #22c55e; font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+
+.btn-del { background: rgba(239, 68, 68, 0.1); border: none; color: #ef4444; width: 40px; height: 40px; border-radius: 12px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
+.btn-del:hover { background: #ef4444; color: #fff; }
+
+.empty-list-container {
+  padding: 100px 20px;
+  text-align: center;
+  color: #3f3f46;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+/* --- MODAL (MANTIDO) --- */
+.wish-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.wish-modal {
+  background: #18181b;
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wish-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6B46C1, transparent);
+}
+
+.modal-header h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.modal-header p {
+  color: #71717a;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+.input-field { margin-bottom: 25px; }
+
+.input-field label {
+  color: #6B46C1;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.input-field input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #27272a;
+  padding: 18px;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-field input:focus {
+  outline: none;
+  border-color: #6B46C1;
+  background: rgba(107, 70, 193, 0.05);
+  box-shadow: 0 0 20px rgba(107, 70, 193, 0.15);
+}
+
+.modal-close-x {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: #27272a;
+  border: none;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-close-x:hover {
+  background: #ef4444;
+  transform: rotate(90deg);
+}
+
+.btn-modal-submit {
+  width: 100%;
+  background: #6B46C1;
+  color: #fff;
+  border: none;
+  padding: 20px;
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(107, 70, 193, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-modal-submit:hover {
+  background: #805ad5;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(107, 70, 193, 0.5);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

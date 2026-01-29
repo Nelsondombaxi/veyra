@@ -24,7 +24,7 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
       <div className="sidebar-divider"></div>
 
       <nav className="sidebar-nav">
-        {/* Clique na Dashboard */}
+        {/* Dashboard */}
         <div 
           className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActiveTab('dashboard')}
@@ -33,7 +33,7 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
           <span>Dashboard</span>
         </div>
 
-        {/* Clique em Projetos */}
+        {/* Projetos */}
         <div 
           className={`nav-item ${activeTab === 'projetos' ? 'active' : ''}`}
           onClick={() => setActiveTab('projetos')}
@@ -42,12 +42,20 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
           <span>Projetos</span>
         </div>
 
-        <div className="nav-item" onClick={() => setActiveTab('financeiro')}>
+        {/* Financeiro - Agora com lógica de Active */}
+        <div 
+          className={`nav-item ${activeTab === 'financeiro' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('financeiro')}
+        >
           <PiWalletBold className="nav-icon" />
           <span>Financeiro</span>
         </div>
         
-        <div className="nav-item" onClick={() => setActiveTab('calendario')}>
+        {/* Calendário */}
+        <div 
+          className={`nav-item ${activeTab === 'calendario' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('calendario')}
+        >
           <PiCalendarBlankBold className="nav-icon" />
           <span>Calendário</span>
         </div>

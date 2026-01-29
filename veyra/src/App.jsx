@@ -4,6 +4,7 @@ import FirstAccess from "./pages/FirstAccess/FirstAccess.jsx"
 import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx"
 import Dashboard from "./pages/Dashboard/Dashboard.jsx"
 import Projects from "./pages/Projects/Projects.jsx" 
+import Finance from "./pages/Finance/Finance.jsx" 
 import StartScreen from "./components/StartScreen/StartScreen.jsx"
 
 function App() {
@@ -45,9 +46,13 @@ function App() {
           />
         ) : (
           <>
-            {/* Troca de conteúdo dinâmica */}
+            {/* Lógica de Troca de Conteúdo Dinâmica */}
             {activeTab === 'dashboard' && <Dashboard user={user} />}
             {activeTab === 'projetos' && <Projects />}
+            {activeTab === 'financeiro' && <Finance />} {/* <-- Nova Aba */}
+            {activeTab === 'calendario' && (
+              <div style={{color: 'white', padding: '40px'}}>Em breve...</div>
+            )}
           </>
         )}
       </MainLayout>
