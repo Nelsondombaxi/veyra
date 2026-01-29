@@ -37,15 +37,9 @@ const Projects = () => {
   };
 
   const filteredProjects = projects.filter((project) => {
-    const matchesSearch = project.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase());
     const targetCategory = filterMap[activeFilter];
-    const matchesCategory =
-      activeFilter === "Todos" ||
-      project.category.toLowerCase() === targetCategory;
-
-    return matchesSearch && matchesCategory;
+    return activeFilter === "Todos" || project.category.toLowerCase() === targetCategory;
   });
 
   return (
@@ -53,10 +47,12 @@ const Projects = () => {
       <div className="projects-content-wrapper">
         <header className="projects-header">
           <div className="header-top-row">
-            <SearchBar
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <div className="search-bar-wrapper">
+              <SearchBar
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
             <ActionButton onClick={() => setIsModalOpen(true)} />
           </div>
 
@@ -70,16 +66,17 @@ const Projects = () => {
           {filteredProjects.length > 0 ? (
             <div className="projects-grid-layout">
               {filteredProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  {...project}
-                  onDelete={() => handleDeleteProject(project.id)}
-                />
+                <div key={project.id} className="project-card-container">
+                   <ProjectCard
+                    {...project}
+                    onDelete={() => handleDeleteProject(project.id)}
+                  />
+                </div>
               ))}
             </div>
           ) : (
             <div className="empty-state-box">
-              <p>Nenhum card encontrado.</p>
+              <p>Nenhum projeto encontrado.</p>
             </div>
           )}
         </main>

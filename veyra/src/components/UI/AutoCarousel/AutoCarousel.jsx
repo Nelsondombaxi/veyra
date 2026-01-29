@@ -4,14 +4,29 @@ import ProjectCard from '../ProjectCard/ProjectCard';
 import './AutoCarousel.css';
 
 const AutoCarousel = ({ items }) => {
+  const INTERVAL_TIME = 5000; // 5 segundos
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (items.length <= 1) return;
+    if (!items || items.length <= 1) return;
+
+    let startTime = localStorage.getItem('@veyra:carousel_start');
+    if (!startTime) {
+      startTime = Date.now().toString();
+      localStorage.setItem('@veyra:carousel_start', startTime);
+    }
+
+    const calculateIndex = () => {
+      const elapsed = Date.now() - parseInt(startTime);
+      const ticks = Math.floor(elapsed / INTERVAL_TIME);
+      return ticks % items.length;
+    };
+
+    setCurrentIndex(calculateIndex());
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 5000);
+      setCurrentIndex(calculateIndex());
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [items]);
@@ -28,19 +43,17 @@ const AutoCarousel = ({ items }) => {
     <div className="carousel-container">
       <AnimatePresence mode="wait">
         <motion.div
-          key={items[currentIndex].id}
-          initial={{ opacity: 0, y: 10, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          key={items[currentIndex]?.id || 'empty'}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="carousel-active-item"
         >
-          {/* Reutilizamos o seu ProjectCard que já tem o estilo Fortnite */}
           <ProjectCard {...items[currentIndex]} hideDelete={true} />
         </motion.div>
       </AnimatePresence>
 
-      {/* Indicadores de bolinha para saber quantos cards tem */}
       {items.length > 1 && (
         <div className="carousel-indicators">
           {items.map((_, index) => (
