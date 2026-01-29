@@ -8,6 +8,7 @@ const Wishlist = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [shakeId, setShakeId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newItem, setNewItem] = useState({ name: '', price: '' });
 
@@ -32,12 +33,37 @@ const Wishlist = () => {
   };
 
   const toggleComplete = (id) => {
-    setItems(items.map(item => 
-      item.id === id ? { ...item, completed: !item.completed } : item
-    ));
+    const financeRaw = localStorage.getItem("@veyra:finance");
+    const financeData = financeRaw ? JSON.parse(financeRaw) : { balance: 0 };
+    
+    const targetItem = items.find(item => item.id === id);
+    
+    // TRAVA: Se já estiver COMPLETO (pago), não faz nada ao clicar
+    if (!targetItem || targetItem.completed) return;
+
+    // Lógica apenas para EFETUAR A COMPRA
+    if (financeData.balance >= targetItem.price) {
+      const newBalance = financeData.balance - targetItem.price;
+      const updatedFinance = { ...financeData, balance: newBalance };
+      
+      localStorage.setItem("@veyra:finance", JSON.stringify(updatedFinance));
+      
+      // Notifica o Finance.jsx e Dashboard para atualizar o saldo do cartão
+      window.dispatchEvent(new Event("storage"));
+
+      setItems(items.map(item => 
+        item.id === id ? { ...item, completed: true } : item
+      ));
+    } else {
+      // Ativa a tremidinha se não tiver Kz suficientes
+      setShakeId(id);
+      setTimeout(() => setShakeId(null), 500); 
+    }
   };
 
   const removeItem = (id) => {
+    // CORREÇÃO: Apenas remove o item da lista. 
+    // O dinheiro NÃO volta para o saldo, mesmo que o item estivesse completed.
     setItems(items.filter(item => item.id !== id));
   };
 
@@ -79,7 +105,11 @@ const Wishlist = () => {
             </div>
           ) : (
             items.map(item => (
-              <div key={item.id} className={`list-row ${item.completed ? 'is-done' : ''}`}>
+              <div 
+                key={item.id} 
+                className={`list-row ${item.completed ? 'is-done locked' : ''} ${shakeId === item.id ? 'shake-error' : ''}`}
+                style={{ cursor: item.completed ? 'default' : 'pointer' }}
+              >
                 <div className="row-main" onClick={() => toggleComplete(item.id)}>
                   <div className="status-icon">
                     {item.completed ? <FiCheckCircle className="done" /> : <FiCircle />}
@@ -99,7 +129,6 @@ const Wishlist = () => {
         </div>
       </div>
 
-      {/* MODAL POPUP FIXO */}
       {isModalOpen && (
         <div className="wish-modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="wish-modal" onClick={e => e.stopPropagation()}>

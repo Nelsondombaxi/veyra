@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CreditCard from "../../components/UI/CreditCard/CreditCard";
 import Wishlist from "../../components/UI/Wishlist/Wishlist";
 import { FiPlus, FiEdit3 } from 'react-icons/fi';
@@ -14,7 +14,7 @@ const Finance = ({ user }) => {
       const parsed = JSON.parse(saved);
       return {
         balance: parsed.balance || 0,
-        theme: parsed.theme || 'black', // Nova propriedade de tema
+        theme: parsed.theme || 'black',
         cardInfo: { bankName: "VEYRA BANK", holderName: fullName }
       };
     }
@@ -24,26 +24,54 @@ const Finance = ({ user }) => {
   const [activeModal, setActiveModal] = useState(null); 
   const [inputValue, setInputValue] = useState("");
 
+  // FUNÇÃO PARA RECARREGAR OS DADOS DO LOCALSTORAGE
+  const refreshData = useCallback(() => {
+    const saved = localStorage.getItem("@veyra:finance");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setFinanceData(prev => ({
+        ...prev,
+        balance: parsed.balance || 0,
+        theme: parsed.theme || 'black'
+      }));
+    }
+  }, []);
+
   useEffect(() => {
+    // Escuta mudanças manuais no Storage ou o evento disparado pela Wishlist
+    window.addEventListener("storage", refreshData);
+    
     // Sincroniza sempre o nome atual do usuário e os dados no Storage
-    const dataToSave = { ...financeData, cardInfo: { ...financeData.cardInfo, holderName: fullName } };
+    const dataToSave = { 
+      ...financeData, 
+      cardInfo: { ...financeData.cardInfo, holderName: fullName } 
+    };
     localStorage.setItem("@veyra:finance", JSON.stringify(dataToSave));
-  }, [financeData, fullName]);
+
+    return () => window.removeEventListener("storage", refreshData);
+  }, [financeData, fullName, refreshData]);
 
   const handleUpdateBalance = (type) => {
     const amount = parseFloat(inputValue);
     if (!isNaN(amount) && amount > 0) {
-      setFinanceData(prev => ({
-        ...prev,
-        balance: type === 'add' ? prev.balance + amount : prev.balance - amount
-      }));
+      const newBalance = type === 'add' ? financeData.balance + amount : financeData.balance - amount;
+      
+      const updatedData = { ...financeData, balance: newBalance };
+      setFinanceData(updatedData);
+      
+      // Notifica outros componentes (como a Dashboard)
+      localStorage.setItem("@veyra:finance", JSON.stringify(updatedData));
+      window.dispatchEvent(new Event("storage"));
     }
     setInputValue("");
     setActiveModal(null);
   };
 
   const changeTheme = (newTheme) => {
-    setFinanceData(prev => ({ ...prev, theme: newTheme }));
+    const updatedData = { ...financeData, theme: newTheme };
+    setFinanceData(updatedData);
+    localStorage.setItem("@veyra:finance", JSON.stringify(updatedData));
+    window.dispatchEvent(new Event("storage"));
     setActiveModal(null);
   };
 
@@ -75,6 +103,7 @@ const Finance = ({ user }) => {
 
         <div className="wishlist-placeholder">
           <div className="section-divider"></div>
+          {/* A Wishlist agora pode atualizar o saldo aqui em cima via EventListener */}
           <Wishlist />
         </div>
       </div>
