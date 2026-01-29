@@ -126,3 +126,27 @@
   right: 0;
   opacity: 0.9;
 }
+
+/* ... (Mantenha seu código anterior e adicione isso no fim) */
+
+/* TEMAS DE CORES */
+.card-theme-black {
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+}
+
+.card-theme-purple {
+  background: linear-gradient(135deg, #2D1B69 0%, #120B2E 100%);
+  border-color: rgba(107, 70, 193, 0.3);
+}
+
+.card-theme-blue {
+  background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+  border-color: rgba(30, 64, 175, 0.3);
+}
+
+/* Efeito Glow para os temas coloridos */
+.card-theme-purple::after {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(107, 70, 193, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}

@@ -8,17 +8,20 @@ import AutoCarousel from "../../components/UI/AutoCarousel/AutoCarousel";
 import CreditCard from "../../components/UI/CreditCard/CreditCard"; 
 
 const Dashboard = ({ user }) => {
+
+  const fullName = `${user?.name || 'Nelson'} ${user?.lastName || 'Dombaxi'}`.toUpperCase();
+
   const [financialData, setFinancialData] = useState(() => {
     const saved = localStorage.getItem("@veyra:finance");
     if (saved) {
       const parsed = JSON.parse(saved);
       return {
-        balance: parsed.balance,
-        bankName: parsed.cardInfo?.bankName,
-        holderName: parsed.cardInfo?.holderName
+        balance: parsed.balance || 0,
+        theme: parsed.theme || 'black',
+        holderName: fullName
       };
     }
-    return { balance: 0, bankName: "VEYRA BANK", holderName: "NELSON DOMBAXI" };
+    return { balance: 0, theme: 'black', holderName: fullName };
   });
 
   const [priorityProjects, setPriorityProjects] = useState(() => {
@@ -35,9 +38,9 @@ const Dashboard = ({ user }) => {
     if (saved) {
       const parsed = JSON.parse(saved);
       setFinancialData({
-        balance: parsed.balance,
-        bankName: parsed.cardInfo?.bankName,
-        holderName: parsed.cardInfo?.holderName
+        balance: parsed.balance || 0,
+        theme: parsed.theme || 'black',
+        holderName: fullName
       });
     }
   };
@@ -46,7 +49,6 @@ const Dashboard = ({ user }) => {
     loadFinancialData();
 
     const handleStorageChange = (e) => {
-      // Escuta a chave correta
       if (e.key === "@veyra:finance") {
         loadFinancialData();
       }
@@ -61,7 +63,7 @@ const Dashboard = ({ user }) => {
     }
 
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
+  }, [fullName]);
 
   return (
     <div className="dashboard-wrapper">
@@ -75,17 +77,19 @@ const Dashboard = ({ user }) => {
       </header>
 
       <main className="area-conteudo-central">
+        {/* SEÇÃO PROJETOS: Agora com o AutoCarousel de volta! */}
         <Showcase title="Projetos em Destaque" icon={FiLayout}>
           <AutoCarousel items={priorityProjects} />
         </Showcase>
 
+        {/* SEÇÃO FINANCEIRO: Cartão com Tema, Saldo e Nome Automático */}
         <Showcase title="Financeiro" icon={FiDollarSign}>
           <div className="dash-finance-center">
-            {/* Passando os dados na estrutura que o seu CreditCard espera */}
             <CreditCard 
               balance={financialData.balance} 
+              theme={financialData.theme}
               cardInfo={{
-                bankName: financialData.bankName,
+                bankName: "VEYRA BANK",
                 holderName: financialData.holderName
               }} 
             />

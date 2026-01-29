@@ -1,8 +1,7 @@
 import React from 'react';
 import './CreditCard.css';
 
-const CreditCard = ({ balance, cardInfo }) => {
-  // Formata o valor para o padrão de moeda (Kz)
+const CreditCard = ({ balance, cardInfo, theme = 'black' }) => {
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('pt-AO', {
       style: 'currency',
@@ -11,11 +10,10 @@ const CreditCard = ({ balance, cardInfo }) => {
   };
 
   return (
-    <div className="mastercard-black-card">
+    <div className={`mastercard-black-card card-theme-${theme}`}>
       <div className="card-inner">
-        {/* Topo do Cartão: Banco e Chip */}
         <div className="card-header">
-          <span className="bank-name">{cardInfo.bankName || "VEYRA BANK"}</span>
+          <span className="bank-name">VEYRA BANK</span>
           <div className="card-chip">
             <div className="chip-line"></div>
             <div className="chip-line"></div>
@@ -24,17 +22,15 @@ const CreditCard = ({ balance, cardInfo }) => {
           </div>
         </div>
 
-        {/* Centro: Saldo Atual */}
         <div className="card-balance-section">
           <p className="balance-label">SALDO DISPONÍVEL</p>
           <h2 className="balance-value">{formatCurrency(balance)}</h2>
         </div>
 
-        {/* Rodapé: Nome do Titular e Logo Mastercard */}
         <div className="card-footer">
           <div className="holder-info">
             <span className="holder-label">TITULAR</span>
-            <span className="holder-name">{cardInfo.holderName || "NOME DO USUÁRIO"}</span>
+            <span className="holder-name">{cardInfo.holderName}</span>
           </div>
           
           <div className="mastercard-logo">

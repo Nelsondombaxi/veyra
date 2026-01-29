@@ -48,10 +48,17 @@ function App() {
           <>
             {/* Lógica de Troca de Conteúdo Dinâmica */}
             {activeTab === 'dashboard' && <Dashboard user={user} />}
-            {activeTab === 'projetos' && <Projects />}
-            {activeTab === 'financeiro' && <Finance />} {/* <-- Nova Aba */}
+            
+            {activeTab === 'projetos' && <Projects user={user} />}
+            
+            {/* AJUSTE AQUI: Passando o user para o Financeiro puxar o nome do titular automaticamente */}
+            {activeTab === 'financeiro' && <Finance user={user} />} 
+            
             {activeTab === 'calendario' && (
-              <div style={{color: 'white', padding: '40px'}}>Em breve...</div>
+              <div style={{color: 'white', padding: '40px', textAlign: 'center'}}>
+                <h2 style={{opacity: 0.5}}>Módulo Calendário</h2>
+                <p style={{color: '#71717a'}}>Em breve no Veyra Bank...</p>
+              </div>
             )}
           </>
         )}

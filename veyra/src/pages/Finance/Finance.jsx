@@ -4,38 +4,31 @@ import Wishlist from "../../components/UI/Wishlist/Wishlist";
 import { FiPlus, FiEdit3 } from 'react-icons/fi';
 import "./Finance.css";
 
-const Finance = () => {
-  // Inicialização segura com LocalStorage
-  const initialFinanceData = (() => {
-    try {
-      const raw = localStorage.getItem("@veyra:finance");
-      if (!raw) return { balance: 0, cardInfo: { bankName: "VEYRA BANK", holderName: "NOME DO USUÁRIO" } };
-      const parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed !== 'object') throw new Error('invalid');
-      return {
-        balance: typeof parsed.balance === 'number' ? parsed.balance : 0,
-        cardInfo: {
-          bankName: parsed.cardInfo?.bankName || 'VEYRA BANK',
-          holderName: parsed.cardInfo?.holderName || 'NOME DO USUÁRIO',
-        },
-      };
-    } catch (err) {
-      try { localStorage.removeItem("@veyra:finance"); } catch (e) {}
-      return { balance: 0, cardInfo: { bankName: 'VEYRA BANK', holderName: 'NOME DO USUÁRIO' } };
-    }
-  })();
+const Finance = ({ user }) => {
+  // Pega o nome do usuário logado (App.js -> veyra_user)
+  const fullName = `${user?.name || 'Nelson'} ${user?.lastName || 'Dombaxi'}`.toUpperCase();
 
-  const [financeData, setFinanceData] = useState(initialFinanceData);
-  const [activeModal, setActiveModal] = useState(null); 
-  const [inputValue, setInputValue] = useState("");
-  const [tempNames, setTempNames] = useState({ 
-    bank: financeData.cardInfo.bankName, 
-    holder: financeData.cardInfo.holderName 
+  const [financeData, setFinanceData] = useState(() => {
+    const saved = localStorage.getItem("@veyra:finance");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      return {
+        balance: parsed.balance || 0,
+        theme: parsed.theme || 'black', // Nova propriedade de tema
+        cardInfo: { bankName: "VEYRA BANK", holderName: fullName }
+      };
+    }
+    return { balance: 0, theme: 'black', cardInfo: { bankName: "VEYRA BANK", holderName: fullName } };
   });
 
+  const [activeModal, setActiveModal] = useState(null); 
+  const [inputValue, setInputValue] = useState("");
+
   useEffect(() => {
-    localStorage.setItem("@veyra:finance", JSON.stringify(financeData));
-  }, [financeData]);
+    // Sincroniza sempre o nome atual do usuário e os dados no Storage
+    const dataToSave = { ...financeData, cardInfo: { ...financeData.cardInfo, holderName: fullName } };
+    localStorage.setItem("@veyra:finance", JSON.stringify(dataToSave));
+  }, [financeData, fullName]);
 
   const handleUpdateBalance = (type) => {
     const amount = parseFloat(inputValue);
@@ -49,11 +42,8 @@ const Finance = () => {
     setActiveModal(null);
   };
 
-  const handleSaveCard = () => {
-    setFinanceData(prev => ({
-      ...prev,
-      cardInfo: { bankName: tempNames.bank, holderName: tempNames.holder }
-    }));
+  const changeTheme = (newTheme) => {
+    setFinanceData(prev => ({ ...prev, theme: newTheme }));
     setActiveModal(null);
   };
 
@@ -62,37 +52,36 @@ const Finance = () => {
       <div className="finance-content-wrapper">
         <header className="finance-header">
           <h1>Gestão Financeira</h1>
-          <p>Controle seu saldo e gerencie seu cartão de elite.</p>
+          <p>Olá, {user?.name}. Controle seu saldo e personalize seu cartão.</p>
         </header>
 
-        {/* SEÇÃO DO TOPO - CARTÃO CENTRALIZADO SEM DISTORÇÃO */}
         <section className="card-management-area">
           <button className="side-action-btn left" onClick={() => setActiveModal('balance')}>
-            <FiPlus />
-            <span>Saldo</span>
+            <FiPlus /> <span>Saldo</span>
           </button>
 
           <div className="central-card">
-            <CreditCard balance={financeData.balance} cardInfo={financeData.cardInfo} />
+            <CreditCard 
+              balance={financeData.balance} 
+              cardInfo={financeData.cardInfo} 
+              theme={financeData.theme} 
+            />
           </div>
 
-          <button className="side-action-btn right" onClick={() => setActiveModal('card')}>
-            <FiEdit3 />
-            <span>Editar</span>
+          <button className="side-action-btn right" onClick={() => setActiveModal('theme')}>
+            <FiEdit3 /> <span>Estilo</span>
           </button>
         </section>
 
-        {/* ÁREA DA LISTA DE COMPRAS (COMPONENTIZAÇÃO FUTURA) */}
         <div className="wishlist-placeholder">
           <div className="section-divider"></div>
-          { <Wishlist /> }
+          <Wishlist />
         </div>
       </div>
 
-      {/* MODAL PARA ADICIONAR/SUBTRAIR VALORES */}
       {activeModal === 'balance' && (
-        <div className="finance-modal-overlay">
-          <div className="finance-modal">
+        <div className="finance-modal-overlay" onClick={() => setActiveModal(null)}>
+          <div className="finance-modal" onClick={e => e.stopPropagation()}>
             <h3>Gerenciar Saldo</h3>
             <input 
               type="number" 
@@ -102,35 +91,24 @@ const Finance = () => {
               autoFocus
             />
             <div className="modal-actions">
-              <button className="btn-confirm add" onClick={() => handleUpdateBalance('add')}>Adicionar Kz</button>
-              <button className="btn-confirm sub" onClick={() => handleUpdateBalance('sub')}>Abater Kz</button>
-              <button className="btn-cancel" onClick={() => setActiveModal(null)}>Fechar</button>
+              <button className="btn-confirm add" onClick={() => handleUpdateBalance('add')}>Adicionar</button>
+              <button className="btn-confirm sub" onClick={() => handleUpdateBalance('sub')}>Abater</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* MODAL PARA EDITAR DADOS DO CARTÃO */}
-      {activeModal === 'card' && (
-        <div className="finance-modal-overlay">
-          <div className="finance-modal">
-            <h3>Configurações do Cartão</h3>
-            <input 
-              type="text" 
-              placeholder="Nome do Banco" 
-              value={tempNames.bank}
-              onChange={(e) => setTempNames({...tempNames, bank: e.target.value})}
-            />
-            <input 
-              type="text" 
-              placeholder="Nome do Titular" 
-              value={tempNames.holder}
-              onChange={(e) => setTempNames({...tempNames, holder: e.target.value})}
-            />
-            <div className="modal-actions">
-              <button className="btn-confirm" onClick={handleSaveCard}>Salvar Alterações</button>
-              <button className="btn-cancel" onClick={() => setActiveModal(null)}>Fechar</button>
+      {activeModal === 'theme' && (
+        <div className="finance-modal-overlay" onClick={() => setActiveModal(null)}>
+          <div className="finance-modal" onClick={e => e.stopPropagation()}>
+            <h3>Estilo do Cartão</h3>
+            <p style={{color: '#71717a', marginBottom: '20px', fontSize: '0.9rem'}}>Escolha a cor da sua conta Premium</p>
+            <div className="theme-grid">
+              <button className="theme-opt black" onClick={() => changeTheme('black')}>Original Black</button>
+              <button className="theme-opt purple" onClick={() => changeTheme('purple')}>Veyra Purple</button>
+              <button className="theme-opt blue" onClick={() => changeTheme('blue')}>Executive Blue</button>
             </div>
+            <button className="btn-cancel" onClick={() => setActiveModal(null)} style={{marginTop: '20px'}}>Voltar</button>
           </div>
         </div>
       )}

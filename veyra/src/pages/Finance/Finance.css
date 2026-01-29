@@ -154,3 +154,29 @@
   letter-spacing: 2px;
   font-size: 1.2rem;
 }
+
+.theme-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.theme-opt {
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #27272a;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-opt.black { background: linear-gradient(90deg, #1a1a1a, #000); }
+.theme-opt.purple { background: linear-gradient(90deg, #2D1B69, #120B2E); }
+.theme-opt.blue { background: linear-gradient(90deg, #0F172A, #020617); }
+
+.theme-opt:hover {
+  transform: scale(1.02);
+  filter: brightness(1.3);
+  border-color: #6B46C1;
+}
