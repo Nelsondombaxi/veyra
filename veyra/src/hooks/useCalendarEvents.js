@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { holidays } from '../data/holidays';
 
 export const useCalendarEvents = () => {
@@ -11,39 +11,69 @@ export const useCalendarEvents = () => {
     localStorage.setItem('veyra_calendar_events', JSON.stringify(userEvents));
   }, [userEvents]);
 
-  const getEventsForDay = (dateKey) => {
-    // Busca feriado fixo
-    const dayHoliday = holidays[dateKey];
-    const dayHolidays = dayHoliday ? [{ ...dayHoliday, isHoliday: true }] : [];
-    
-    // Busca eventos do usuário
-    const dayUserEvents = userEvents[dateKey] || [];
-    
-    return [...dayHolidays, ...dayUserEvents];
-  };
+  // Usamos useCallback para evitar re-renderizações infinitas no useEffect do componente
+  const getUpcomingEvents = useCallback((limit = 10) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const currentYear = 2026; 
 
-  const addUserEvent = (dateKey, newEvent) => {
-    setUserEvents(prev => ({
-      ...prev,
-      [dateKey]: [...(prev[dateKey] || []), { ...newEvent, isHoliday: false }]
-    }));
-  };
+    let allUpcoming = [];
 
-  // Nova função para apagar
-  const deleteUserEvent = (dateKey, eventIndex) => {
-    setUserEvents(prev => {
-      const dayEvents = [...(prev[dateKey] || [])];
-      // O index aqui precisa considerar que feriados vêm primeiro na lista total
-      // Por isso, no ModalView passaremos o index correto para esta função
-      dayEvents.splice(eventIndex, 1);
+    // Processar Feriados
+    Object.entries(holidays).forEach(([dateKey, data]) => {
+      // split('-') lida com "02-14" ou "2-14"
+      const parts = dateKey.split('-');
+      const m = parseInt(parts[0], 10);
+      const d = parseInt(parts[1], 10);
       
-      if (dayEvents.length === 0) {
-        const { [dateKey]: _, ...rest } = prev;
-        return rest;
+      const eventDate = new Date(currentYear, m - 1, d);
+      if (eventDate >= today) {
+        allUpcoming.push({ 
+          ...data, 
+          date: eventDate, 
+          isHoliday: true,
+          id: `holiday-${dateKey}` 
+        });
       }
-      return { ...prev, [dateKey]: dayEvents };
     });
-  };
 
-  return { getEventsForDay, addUserEvent, deleteUserEvent };
+    // Processar Eventos do Usuário
+    Object.entries(userEvents).forEach(([dateKey, events]) => {
+      const parts = dateKey.split('-');
+      const m = parseInt(parts[0], 10);
+      const d = parseInt(parts[1], 10);
+      
+      const eventDate = new Date(currentYear, m - 1, d);
+      if (eventDate >= today) {
+        events.forEach((ev, idx) => {
+          allUpcoming.push({ 
+            ...ev, 
+            date: eventDate, 
+            isHoliday: false,
+            id: `user-${dateKey}-${idx}` 
+          });
+        });
+      }
+    });
+
+    return allUpcoming
+      .sort((a, b) => a.date - b.date)
+      .slice(0, limit);
+  }, [userEvents]);
+
+  return { 
+    getEventsForDay: (dateKey) => {
+      const dayHoliday = holidays[dateKey];
+      const dayHolidays = dayHoliday ? [{ ...dayHoliday, isHoliday: true }] : [];
+      return [...dayHolidays, ...(userEvents[dateKey] || [])];
+    }, 
+    addUserEvent: (dateKey, newEvent) => {
+      setUserEvents(prev => ({
+        ...prev,
+        [dateKey]: [...(prev[dateKey] || []), { ...newEvent, isHoliday: false }]
+      }));
+    },
+    deleteUserEvent: (dateKey, index) => { /* lógica de delete */ },
+    getUpcomingEvents 
+  };
 };

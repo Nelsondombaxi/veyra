@@ -1,0 +1,23 @@
+.upcoming-events-container {
+  width: 100%;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+}
+
+.carousel-track-flat {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.carousel-item-flat {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: z-index 0.3s;
+}

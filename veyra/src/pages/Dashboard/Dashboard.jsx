@@ -6,6 +6,8 @@ import WelcomeWidget from "../../components/UI/WelcomeWidget/WelcomeWidget";
 import Showcase from "../../components/UI/Showcase/Showcase";
 import AutoCarousel from "../../components/UI/AutoCarousel/AutoCarousel";
 import CreditCard from "../../components/UI/CreditCard/CreditCard"; 
+// 🔥 Importamos o novo componente de UI
+import UpcomingEvents from "../../components/UI/UpcomingEvents/UpcomingEvents";
 
 const Dashboard = ({ user }) => {
 
@@ -64,12 +66,12 @@ const Dashboard = ({ user }) => {
       </header>
 
       <main className="area-conteudo-central">
-        {/* SEÇÃO PROJETOS: Agora com o AutoCarousel de volta! */}
+        {/* SEÇÃO PROJETOS */}
         <Showcase title="Projetos em Destaque" icon={FiLayout}>
           <AutoCarousel items={priorityProjects} />
         </Showcase>
 
-        {/* SEÇÃO FINANCEIRO: Cartão com Tema, Saldo e Nome Automático */}
+        {/* SEÇÃO FINANCEIRO */}
         <Showcase title="Financeiro" icon={FiDollarSign}>
           <div className="dash-finance-center">
             <CreditCard 
@@ -83,9 +85,10 @@ const Dashboard = ({ user }) => {
           </div>
         </Showcase>
 
+        {/* SEÇÃO CALENDÁRIO: Agora com Feed de Próximos Eventos */}
         <Showcase title="Calendário" icon={FiCalendar}>
-          <div className="empty-placeholder-dash">
-            <p>Nenhum evento próximo agendado.</p>
+          <div className="dash-calendar-content">
+            <UpcomingEvents />
           </div>
         </Showcase>
       </main>

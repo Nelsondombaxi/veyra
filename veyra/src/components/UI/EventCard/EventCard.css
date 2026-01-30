@@ -1,0 +1,64 @@
+.upcoming-event-card {
+  width: 155px;
+  height: 155px;
+  background: #121214;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.calendar-date-square {
+  position: absolute;
+  top: 15px;
+  left: 18px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.date-day {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.date-month {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #8b5cf6;
+  text-transform: uppercase;
+}
+
+.event-emoji {
+  font-size: 4rem;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+}
+
+/* Nome do Evento ABAIXO do Quadrado */
+.event-texts {
+  position: absolute;
+  bottom: -35px; /* Espaço entre o card e o texto */
+  width: 160px;
+  text-align: center;
+}
+
+.event-name {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.active-card .event-name {
+  opacity: 1;
+  font-weight: 700;
+}
