@@ -1,6 +1,6 @@
 // src/components/UI/EventIndicator/EventIndicator.jsx
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import './EventIndicator.css';
 
 const EventIndicator = ({ event }) => {
@@ -13,7 +13,7 @@ const EventIndicator = ({ event }) => {
   };
 
   return (
-    <motion.div 
+    <Motion.div 
       className="emoji-indicator-wrapper"
       animate={animation}
       title={event.name} // Mostra o nome ao passar o rato
@@ -21,7 +21,7 @@ const EventIndicator = ({ event }) => {
       <span className="huge-emoji">{event.icon}</span>
       {/* Brilho colorido atrás do emoji para destacar no tema dark */}
       <div className="emoji-glow" style={{ backgroundColor: event.color }}></div>
-    </motion.div>
+  </Motion.div>
   );
 };
 

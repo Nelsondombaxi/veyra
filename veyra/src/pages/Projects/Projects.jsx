@@ -39,7 +39,8 @@ const Projects = () => {
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase());
     const targetCategory = filterMap[activeFilter];
-    return activeFilter === "Todos" || project.category.toLowerCase() === targetCategory;
+    const matchesFilter = activeFilter === "Todos" || project.category.toLowerCase() === targetCategory;
+    return matchesFilter && matchesSearch;
   });
 
   return (

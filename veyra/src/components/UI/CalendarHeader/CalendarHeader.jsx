@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 // Estilos inline ou no CSS, mas vamos focar na estrutura
 // Sugiro adicionar isso ao CalendarPage.css ou criar um CalendarHeader.css
@@ -30,7 +30,7 @@ const CalendarHeader = ({ currentMonth, currentYear, onPrevMonth, onNextMonth })
 
 // Componente de botãozinho reutilizável com animação
 const NavButton = ({ onClick, icon }) => (
-  <motion.button 
+  <Motion.button 
     onClick={onClick}
     whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
     whileTap={{ scale: 0.9 }}
@@ -48,7 +48,7 @@ const NavButton = ({ onClick, icon }) => (
     }}
   >
     {icon}
-  </motion.button>
+  </Motion.button>
 );
 
 export default CalendarHeader;

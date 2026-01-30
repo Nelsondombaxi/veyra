@@ -14,7 +14,7 @@ function App() {
   
   const [activeTab, setActiveTab] = useState('dashboard')
   const [showStart, setShowStart] = useState(() => !!saved)
-  const [canCreateAnother, setCanCreateAnother] = useState(() => !!saved)
+  const [canCreateAnother, _setCanCreateAnother] = useState(() => !!saved)
 
   const handleLogin = (u) => {
     setUser(u)

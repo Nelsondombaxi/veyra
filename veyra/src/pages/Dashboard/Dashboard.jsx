@@ -24,7 +24,7 @@ const Dashboard = ({ user }) => {
     return { balance: 0, theme: 'black', holderName: fullName };
   });
 
-  const [priorityProjects, setPriorityProjects] = useState(() => {
+  const [priorityProjects, _setPriorityProjects] = useState(() => {
     const saved = localStorage.getItem('@veyra:projects');
     if (saved) {
       const allProjects = JSON.parse(saved);
@@ -33,35 +33,22 @@ const Dashboard = ({ user }) => {
     return [];
   });
 
-  const loadFinancialData = () => {
-    const saved = localStorage.getItem("@veyra:finance");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      setFinancialData({
-        balance: parsed.balance || 0,
-        theme: parsed.theme || 'black',
-        holderName: fullName
-      });
-    }
-  };
-
   useEffect(() => {
-    loadFinancialData();
-
     const handleStorageChange = (e) => {
       if (e.key === "@veyra:finance") {
-        loadFinancialData();
+        const saved = localStorage.getItem("@veyra:finance");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setFinancialData({
+            balance: parsed.balance || 0,
+            theme: parsed.theme || 'black',
+            holderName: fullName
+          });
+        }
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
-
-    const savedProjects = localStorage.getItem('@veyra:projects');
-    if (savedProjects) {
-      const allProjects = JSON.parse(savedProjects);
-      setPriorityProjects(allProjects.filter(p => p.isPriority === true));
-    }
-
     return () => window.removeEventListener("storage", handleStorageChange);
   }, [fullName]);
 

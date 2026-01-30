@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import './AutoCarousel.css';
 
 const AutoCarousel = ({ items }) => {
   const INTERVAL_TIME = 5000; // 5 segundos
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    try {
+      if (!items || items.length === 0) return 0;
+      let startTime = localStorage.getItem('@veyra:carousel_start');
+      if (!startTime) {
+        startTime = Date.now().toString();
+        localStorage.setItem('@veyra:carousel_start', startTime);
+      }
+      const elapsed = Date.now() - parseInt(startTime);
+      const ticks = Math.floor(elapsed / INTERVAL_TIME);
+      return ticks % items.length;
+    } catch {
+      return 0;
+    }
+  });
 
   useEffect(() => {
     if (!items || items.length <= 1) return;
@@ -21,8 +35,6 @@ const AutoCarousel = ({ items }) => {
       const ticks = Math.floor(elapsed / INTERVAL_TIME);
       return ticks % items.length;
     };
-
-    setCurrentIndex(calculateIndex());
 
     const interval = setInterval(() => {
       setCurrentIndex(calculateIndex());
@@ -42,7 +54,7 @@ const AutoCarousel = ({ items }) => {
   return (
     <div className="carousel-container">
       <AnimatePresence mode="wait">
-        <motion.div
+        <Motion.div
           key={items[currentIndex]?.id || 'empty'}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -51,7 +63,7 @@ const AutoCarousel = ({ items }) => {
           className="carousel-active-item"
         >
           <ProjectCard {...items[currentIndex]} hideDelete={true} />
-        </motion.div>
+        </Motion.div>
       </AnimatePresence>
 
       {items.length > 1 && (
