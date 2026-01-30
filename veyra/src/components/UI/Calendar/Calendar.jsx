@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import CalendarHeader from '../CalendarHeader/CalendarHeader';
-import EventIndicator from '../EventIndicator/EventIndicator'; // O componente visual do ícone
+import EventIndicator from '../EventIndicator/EventIndicator';
 import CalendarModal from '../../UI/CalendarModal/CalendarModal';
 import { useCalendarEvents } from '../../../hooks/useCalendarEvents';
 import './Calendar.css';
@@ -12,7 +12,8 @@ const Calendar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDateKey, setSelectedDateKey] = useState(null);
 
-  const { getEventsForDay, addUserEvent } = useCalendarEvents();
+  // Hook atualizado com a função de apagar
+  const { getEventsForDay, addUserEvent, deleteUserEvent } = useCalendarEvents();
 
   const viewMonth = date.getMonth();
   const viewYear = date.getFullYear();
@@ -27,23 +28,17 @@ const Calendar = () => {
     const firstDayIndex = new Date(viewYear, viewMonth, 1).getDay();
     const days = [];
 
-    // Blocos vazios (para alinhar o dia 1 na semana correta)
     for (let i = 0; i < firstDayIndex; i++) {
       days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
     }
 
-    // Dias reais
     for (let d = 1; d <= daysInMonth; d++) {
       const isToday = new Date().toDateString() === new Date(viewYear, viewMonth, d).toDateString();
       
-  // 1. Verifica se existe um feriado para este dia específico
-  // (Não armazenamos aqui em `holiday` porque usamos getEventsForDay que já compõe feriado + eventos)
-
-  // chave usada no armazenamento/lookup: MM-DD
       const pad = (n) => String(n).padStart(2, '0');
       const dateKey = `${pad(viewMonth + 1)}-${pad(d)}`;
 
-      // obtém feriados + eventos de usuário (pode ser array vazio)
+      // Lista completa de feriados + eventos do usuário
       const dayEvents = getEventsForDay(dateKey) || [];
 
       days.push(
@@ -62,10 +57,10 @@ const Calendar = () => {
             <span className="day-number">{d}</span>
           </div>
 
-          {/* 2. Se houver eventos (feriado ou usuário), mostra o indicador automático */}
+          {/* INDICADOR COM CARROSSEL AUTOMÁTICO NO GRID */}
           {dayEvents.length > 0 && (
             <div className="day-events-container">
-              <EventIndicator event={dayEvents[0]} />
+              <EventIndicator events={dayEvents} />
             </div>
           )}
           
@@ -75,18 +70,13 @@ const Calendar = () => {
     return days;
   };
 
-  // Configuração da animação de slide
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? 50 : -50,
       opacity: 0,
       scale: 0.95
     }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1
-    },
+    center: { x: 0, opacity: 1, scale: 1 },
     exit: (direction) => ({
       x: direction > 0 ? -50 : 50,
       opacity: 0,
@@ -125,14 +115,16 @@ const Calendar = () => {
           </Motion.div>
         </AnimatePresence>
       </div>
-        {/* Modal para ver/adicionar eventos num dia */}
-        <CalendarModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          dateKey={selectedDateKey}
-          events={selectedDateKey ? (getEventsForDay(selectedDateKey) || []) : []}
-          onAddEvent={(dateKey, newEvent) => addUserEvent(dateKey, newEvent)}
-        />
+
+      {/* MODAL COMPLETO COM FUNÇÃO DE ADICIONAR E APAGAR */}
+      <CalendarModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        dateKey={selectedDateKey}
+        events={selectedDateKey ? (getEventsForDay(selectedDateKey) || []) : []}
+        onAddEvent={(dateKey, newEvent) => addUserEvent(dateKey, newEvent)}
+        onDeleteEvent={(index) => deleteUserEvent(selectedDateKey, index)}
+      />
     </div>
   );
 };

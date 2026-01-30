@@ -5,21 +5,16 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  margin-top: 5px;
+  margin-top: 8px;
+  z-index: 1;
 }
 
 .huge-emoji {
-  font-size: 2.8rem; /* Emoji bem grande para o calendário gigante */
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-  z-index: 2;
+  font-size: 2.6rem; 
+  /* Apenas uma sombra leve para dar profundidade, sem brilho colorido */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  z-index: 3;
+  position: relative;
 }
 
-.emoji-glow {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  filter: blur(20px);
-  opacity: 0.25;
-  z-index: 1;
-}
+/* Removido o emoji-glow e as animações de neon */

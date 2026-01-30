@@ -1,27 +1,39 @@
-// src/components/UI/EventIndicator/EventIndicator.jsx
-import React from 'react';
-import { motion as Motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import './EventIndicator.css';
 
-const EventIndicator = ({ event }) => {
-  if (!event) return null;
+const EventIndicator = ({ events = [] }) => {
+  const [index, setIndex] = useState(0);
 
-  // Animação simples para o emoji não ficar parado
-  const animation = {
-    y: [0, -8, 0],
-    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-  };
+  // Carrossel automático se houver mais de um evento no dia
+  useEffect(() => {
+    if (events.length <= 1) return;
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % events.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [events]);
+
+  if (!events || events.length === 0) return null;
+
+  const currentEvent = events[index];
 
   return (
-    <Motion.div 
-      className="emoji-indicator-wrapper"
-      animate={animation}
-      title={event.name} // Mostra o nome ao passar o rato
-    >
-      <span className="huge-emoji">{event.icon}</span>
-      {/* Brilho colorido atrás do emoji para destacar no tema dark */}
-      <div className="emoji-glow" style={{ backgroundColor: event.color }}></div>
-  </Motion.div>
+    <div className="emoji-indicator-wrapper">
+      <AnimatePresence mode="wait">
+        <Motion.div 
+          key={index}
+          className="emoji-animation-container"
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -10, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="huge-emoji">{currentEvent.icon || currentEvent.emoji}</span>
+          <div className="emoji-glow" style={{ backgroundColor: currentEvent.color || '#8b5cf6' }}></div>
+        </Motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
