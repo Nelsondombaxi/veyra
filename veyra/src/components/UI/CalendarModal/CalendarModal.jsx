@@ -5,7 +5,7 @@ import ModalView from './ModalView';
 import ModalAdd from './ModalAdd';
 import './CalendarModal.css';
 
-const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent }) => {
+const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent, onDeleteEvent }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -15,6 +15,18 @@ const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent }) => {
   if (!isOpen) return null;
 
   const isAdding = currentIndex === events.length;
+
+  const handleDelete = (index) => {
+    // Chamamos a função passando o index. A dateKey já está no escopo do pai ou passada aqui.
+    onDeleteEvent(index); 
+    
+    if (events.length <= 1) {
+      onClose();
+    } else {
+      // Ajusta o index para não cair em buraco vazio
+      setCurrentIndex(prev => Math.max(0, prev - 1));
+    }
+  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -44,6 +56,7 @@ const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent }) => {
               event={events[currentIndex]}
               onNext={() => setCurrentIndex(prev => prev + 1)}
               onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
+              onDelete={() => handleDelete(currentIndex)} // 🔥 Passa o index atual corretamente
               currentIndex={currentIndex}
               totalEvents={events.length}
             />

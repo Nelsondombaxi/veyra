@@ -12,7 +12,7 @@ const Calendar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDateKey, setSelectedDateKey] = useState(null);
 
-  // Hook atualizado com a função de apagar
+  // Hook com as funções de gestão de estado
   const { getEventsForDay, addUserEvent, deleteUserEvent } = useCalendarEvents();
 
   const viewMonth = date.getMonth();
@@ -28,17 +28,19 @@ const Calendar = () => {
     const firstDayIndex = new Date(viewYear, viewMonth, 1).getDay();
     const days = [];
 
+    // Preenchimento de dias vazios do mês anterior
     for (let i = 0; i < firstDayIndex; i++) {
       days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
     }
 
+    // Geração dos dias do mês atual
     for (let d = 1; d <= daysInMonth; d++) {
       const isToday = new Date().toDateString() === new Date(viewYear, viewMonth, d).toDateString();
       
       const pad = (n) => String(n).padStart(2, '0');
+      // dateKey no formato "MM-DD" para bater com holidays.js
       const dateKey = `${pad(viewMonth + 1)}-${pad(d)}`;
 
-      // Lista completa de feriados + eventos do usuário
       const dayEvents = getEventsForDay(dateKey) || [];
 
       days.push(
@@ -121,8 +123,10 @@ const Calendar = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         dateKey={selectedDateKey}
-        events={selectedDateKey ? (getEventsForDay(selectedDateKey) || []) : []}
+        // Garante que passamos os eventos atualizados do dia selecionado
+        events={selectedDateKey ? getEventsForDay(selectedDateKey) : []}
         onAddEvent={(dateKey, newEvent) => addUserEvent(dateKey, newEvent)}
+        // A função deleteUserEvent recebe a data selecionada e o index enviado pelo Modal
         onDeleteEvent={(index) => deleteUserEvent(selectedDateKey, index)}
       />
     </div>
