@@ -1,0 +1,113 @@
+/* Calendar.css */
+
+/* Variáveis para facilitar ajustes */
+:root {
+  --primary-color: #8b5cf6; /* Roxo do seu tema */
+  --primary-glow: rgba(139, 92, 246, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-muted: rgba(255, 255, 255, 0.5);
+}
+
+.calendar-container-mobile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Impede scroll indesejado durante animação */
+}
+
+/* Dias da Semana (D S T Q...) */
+.week-days-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.week-day {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-left: 12px; /* Alinhar com o padding do dia */
+}
+
+.calendar-grid-wrapper {
+  flex: 1;
+  position: relative; /* Para o AnimatePresence funcionar bem */
+  overflow: hidden;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 12px; /* Espaço entre os cartões */
+  height: 100%;
+  padding: 4px; /* Espaço para o glow não cortar */
+}
+
+/* Estilo Base do Dia */
+.calendar-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px; /* Bordas arredondadas modernas */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  height: 100%;
+  min-height: 80px;
+}
+
+/* Dias Vazios (início do mês) */
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+/* Efeito Hover nos dias normais */
+.calendar-day:not(.empty):hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px); /* Leve flutuação */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.day-number {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  z-index: 2;
+}
+
+/* O DIA ATUAL (Destaque) */
+.calendar-day.is-today {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #6d28d9 100%);
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.calendar-day.is-today .day-number {
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Indicador visual de "Hoje" (bolinha opcional) */
+.calendar-day.is-today::after {
+  content: 'Hoje';
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.8;
+  color: white;
+}

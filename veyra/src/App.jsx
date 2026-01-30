@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import FirstAccess from "./pages/FirstAccess/FirstAccess.jsx"
 import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx"
 import Dashboard from "./pages/Dashboard/Dashboard.jsx"
 import Projects from "./pages/Projects/Projects.jsx" 
 import Finance from "./pages/Finance/Finance.jsx" 
+import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx" // 1. IMPORTA AQUI
 import StartScreen from "./components/StartScreen/StartScreen.jsx"
 
 function App() {
@@ -46,20 +47,12 @@ function App() {
           />
         ) : (
           <>
-            {/* Lógica de Troca de Conteúdo Dinâmica */}
             {activeTab === 'dashboard' && <Dashboard user={user} />}
-            
             {activeTab === 'projetos' && <Projects user={user} />}
-            
-            {/* AJUSTE AQUI: Passando o user para o Financeiro puxar o nome do titular automaticamente */}
             {activeTab === 'financeiro' && <Finance user={user} />} 
             
-            {activeTab === 'calendario' && (
-              <div style={{color: 'white', padding: '40px', textAlign: 'center'}}>
-                <h2 style={{opacity: 0.5}}>Módulo Calendário</h2>
-                <p style={{color: '#71717a'}}>Em breve no Veyra Bank...</p>
-              </div>
-            )}
+            {/* 2. CONEXÃO REAL DO CALENDÁRIO AQUI */}
+            {activeTab === 'calendario' && <CalendarPage user={user} />}
           </>
         )}
       </MainLayout>

@@ -1,0 +1,24 @@
+.calendar-page-wrapper {
+  height: 100vh; /* Ocupa a altura total da janela */
+  padding: 30px;
+  background: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-page-content {
+  width: 100%; /* Ocupa toda a largura disponível ao lado da Sidebar */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-calendar-area {
+  flex: 1; /* Faz esta área crescer para ocupar o resto da página */
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+}
