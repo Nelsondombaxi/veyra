@@ -2,7 +2,8 @@ import React from 'react';
 import './StatusFilter.css';
 
 const StatusFilter = ({ activeFilter, onFilterChange }) => {
-  const filters = ['Todos', 'Metas', 'Tarefas', 'Treinos', 'Objetivos'];
+  // Mantemos os nomes que aparecem na interface
+  const filters = ['Todos', 'Metas', 'Tarefas', 'Treinos', 'Objetivos', 'Lembretes'];
 
   return (
     <div className="veyra-filter-group">

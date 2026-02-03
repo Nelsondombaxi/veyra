@@ -3,8 +3,8 @@ import { FiX, FiTarget, FiCheckCircle, FiActivity, FiFlag, FiClock, FiCalendar }
 import './CreationModal.css';
 
 const icons = [
-  { id: 'metas', icon: <FiTarget />, label: 'Meta' },
-  { id: 'tarefas', icon: <FiCheckCircle />, label: 'Tarefa' },
+  { id: 'meta', icon: <FiTarget />, label: 'Meta' },
+  { id: 'tarefa', icon: <FiCheckCircle />, label: 'Tarefa' },
   { id: 'treino', icon: <FiActivity />, label: 'Treino' },
   { id: 'objetivo', icon: <FiFlag />, label: 'Objetivo' },
   { id: 'lembrete', icon: <FiClock />, label: 'Lembrete' },
@@ -14,7 +14,8 @@ const colors = ['#6B46C1', '#EC4899', '#3B82F6', '#10B981', '#F59E0B'];
 
 const CreationModal = ({ isOpen, onClose, onSave }) => {
   const [title, setTitle] = useState('');
-  const [selectedIcon, setSelectedIcon] = useState('metas');
+  // CORREÇÃO: O ID é 'meta', não 'metas'
+  const [selectedIcon, setSelectedIcon] = useState('meta'); 
   const [selectedColor, setSelectedColor] = useState('#6B46C1');
   const [isPriority, setIsPriority] = useState(false);
   const [date, setDate] = useState('');
@@ -24,6 +25,7 @@ const CreationModal = ({ isOpen, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Formata apenas se tiver data
     const formattedTime = date ? `${date.split('-').reverse().join('/')} ${time}` : time;
     
     onSave({ 
@@ -45,7 +47,7 @@ const CreationModal = ({ isOpen, onClose, onSave }) => {
             <h2>Novo Card</h2>
             <p>Personalize sua meta ou tarefa</p>
           </div>
-          <button className="close-modal-btn" onClick={onClose}>
+          <button className="close-modal-btn" onClick={onClose} type="button">
             <FiX />
           </button>
         </header>
@@ -55,10 +57,11 @@ const CreationModal = ({ isOpen, onClose, onSave }) => {
             <label className="section-label">Título</label>
             <input 
               className="modal-input" 
-              placeholder="Ex: Treino de pernas ou Meta de vendas..." 
+              placeholder="Ex: Treino de pernas..." 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
+              autoFocus
             />
           </div>
 

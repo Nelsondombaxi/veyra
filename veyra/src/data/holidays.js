@@ -122,7 +122,7 @@ export const holidays = {
   // ⭐ DEZEMBRO
   "12-25": { 
     name: "Natal", 
-    icon: "🎁", 
+    icon: "🎅", 
     color: "#10b981",
     description: "Celebração do nascimento de Jesus, marcada por momentos de fraternidade, troca de presentes e ceia em família." 
   }

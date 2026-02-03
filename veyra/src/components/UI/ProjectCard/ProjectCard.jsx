@@ -3,8 +3,8 @@ import { FiTarget, FiCheckCircle, FiActivity, FiFlag, FiClock, FiTrash2, FiStar 
 import './ProjectCard.css';
 
 const iconMap = {
-  metas: <FiTarget />,
-  tarefas: <FiCheckCircle />,
+  meta: <FiTarget />,
+  tarefa: <FiCheckCircle />,
   treino: <FiActivity />,
   objetivo: <FiFlag />,
   lembrete: <FiClock />

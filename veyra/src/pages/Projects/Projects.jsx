@@ -28,18 +28,18 @@ const Projects = () => {
     setProjects(projects.filter((p) => p.id !== id));
   };
 
-  const filterMap = {
-    Todos: "todos",
-    Metas: "metas",
-    Tarefas: "tarefas",
-    Treinos: "treino",
-    Objetivos: "objetivo",
-  };
-
   const filteredProjects = projects.filter((project) => {
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const targetCategory = filterMap[activeFilter];
-    const matchesFilter = activeFilter === "Todos" || project.category.toLowerCase() === targetCategory;
+    const titleLower = project.title.toLowerCase().trim();
+    const searchLower = searchTerm.toLowerCase().trim();
+    const matchesSearch = searchLower === "" || titleLower.startsWith(searchLower);
+
+    if (activeFilter === "Todos") return matchesSearch;
+
+    const projectCat = project.category.toLowerCase().trim().replace(/s$/, '');
+    const selectedFilter = activeFilter.toLowerCase().trim().replace(/s$/, '');
+
+    const matchesFilter = projectCat === selectedFilter;
+
     return matchesFilter && matchesSearch;
   });
 
@@ -52,6 +52,7 @@ const Projects = () => {
               <SearchBar
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Pesquisa o projeto..."
               />
             </div>
             <ActionButton onClick={() => setIsModalOpen(true)} />
@@ -77,7 +78,11 @@ const Projects = () => {
             </div>
           ) : (
             <div className="empty-state-box">
-              <p>Nenhum projeto encontrado.</p>
+              {searchTerm ? (
+                <p>Nenhum item começa com "{searchTerm}".</p>
+              ) : (
+                <p>Nenhum item encontrado em "{activeFilter}".</p>
+              )}
             </div>
           )}
         </main>

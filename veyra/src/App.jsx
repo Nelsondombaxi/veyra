@@ -5,7 +5,7 @@ import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx"
 import Dashboard from "./pages/Dashboard/Dashboard.jsx"
 import Projects from "./pages/Projects/Projects.jsx" 
 import Finance from "./pages/Finance/Finance.jsx" 
-import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx" // 1. IMPORTA AQUI
+import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx" 
 import StartScreen from "./components/StartScreen/StartScreen.jsx"
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
   const [user, setUser] = useState(() => (saved ? JSON.parse(saved) : null))
   
   const [activeTab, setActiveTab] = useState('dashboard')
-  const [showStart, setShowStart] = useState(() => !!saved)
-  const [canCreateAnother, _setCanCreateAnother] = useState(() => !!saved)
+  
+  const [showStart, setShowStart] = useState(false)
 
   const handleLogin = (u) => {
     setUser(u)
@@ -22,6 +22,14 @@ function App() {
   }
 
   const handleStart = () => setShowStart(false)
+
+  const handleLockScreen = () => setShowStart(true)
+
+  const handleCreateNewAccount = () => {
+    localStorage.removeItem('veyra_user') 
+    setUser(null)
+    setShowStart(false)
+  }
 
   if (!user) {
     return (
@@ -37,21 +45,21 @@ function App() {
         user={user} 
         activeTab={activeTab} 
         setActiveTab={setActiveTab}
+        onLock={handleLockScreen}
       >
+        {/* A StartScreen agora só aparece se 'showStart' for true (via clique no perfil) */}
         {showStart ? (
           <StartScreen 
             user={user} 
             onStart={handleStart} 
-            onCreateAnother={() => {}} 
-            canCreateAnother={canCreateAnother} 
+            onCreateAnother={handleCreateNewAccount} 
+            canCreateAnother={true} 
           />
         ) : (
           <>
             {activeTab === 'dashboard' && <Dashboard user={user} />}
             {activeTab === 'projetos' && <Projects user={user} />}
             {activeTab === 'financeiro' && <Finance user={user} />} 
-            
-            {/* 2. CONEXÃO REAL DO CALENDÁRIO AQUI */}
             {activeTab === 'calendario' && <CalendarPage user={user} />}
           </>
         )}

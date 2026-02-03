@@ -1,40 +1,46 @@
+/* InputField.css */
 .input-field-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 .input-label {
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 13px;
-  color: #a1a1aa;
-  letter-spacing: 0.4px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+  margin-left: 4px;
 }
 
 .input-field {
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #1c1c21;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente escuro */
   font-size: 15px;
   color: #ffffff;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   outline: none;
-}
-
-.input-field:focus {
-  background-color: #23232a;
-  border-color: #6B46C1;
-  box-shadow: 0 0 0 4px rgba(107, 70, 193, 0.15);
+  width: 100%;
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
 }
 
 .input-field::placeholder {
-  color: #52525b;
-  font-weight: 400;
+  color: #475569;
 }
 
 .input-field:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.input-field:focus {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
 }

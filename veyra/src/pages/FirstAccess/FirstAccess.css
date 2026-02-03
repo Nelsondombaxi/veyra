@@ -1,8 +1,45 @@
+/* FirstAccess.css */
 .first-access-page {
   width: 100%;
   min-height: 100vh;
-  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  background-color: #050505;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.first-access-page::before,
+.first-access-page::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+  animation: floatBackground 10s infinite alternate ease-in-out;
+}
+
+.first-access-page::before {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, #4c1d95 0%, transparent 70%);
+  top: -10%;
+  left: -10%;
+}
+
+.first-access-page::after {
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, #6d28d9 0%, transparent 70%);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes floatBackground {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 50px) scale(1.1); }
 }

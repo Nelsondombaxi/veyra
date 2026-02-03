@@ -6,7 +6,6 @@ import WelcomeWidget from "../../components/UI/WelcomeWidget/WelcomeWidget";
 import Showcase from "../../components/UI/Showcase/Showcase";
 import AutoCarousel from "../../components/UI/AutoCarousel/AutoCarousel";
 import CreditCard from "../../components/UI/CreditCard/CreditCard"; 
-// 🔥 Importamos o novo componente de UI
 import UpcomingEvents from "../../components/UI/UpcomingEvents/UpcomingEvents";
 
 const Dashboard = ({ user }) => {

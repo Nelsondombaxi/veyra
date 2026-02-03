@@ -13,12 +13,18 @@ const StartScreen = ({ user, onStart, onCreateAnother, canCreateAnother }) => {
 
         <div className="start-actions">
           <button className="btn btn-primary" onClick={onStart}>Iniciar</button>
+          
+          {/* Agora este botão chama a função de logout/reset */}
           {canCreateAnother && (
-            <button className="btn btn-ghost" onClick={onCreateAnother}>Criar outra conta</button>
+            <button className="btn btn-ghost" onClick={onCreateAnother}>
+              Criar outra conta
+            </button>
           )}
         </div>
 
-        <small className="start-note">Os dados apresentados só aparecem porque estão salvos no seu dispositivo.</small>
+        <small className="start-note">
+          Os dados apresentados só aparecem porque estão salvos no seu dispositivo.
+        </small>
       </div>
     </div>
   )

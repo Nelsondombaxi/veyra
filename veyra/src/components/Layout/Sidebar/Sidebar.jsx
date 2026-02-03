@@ -7,13 +7,20 @@ import {
   PiListChecksBold
 } from "react-icons/pi";
 
-const Sidebar = ({ user, activeTab, setActiveTab }) => {
+// Adicionamos 'onLock' nas props
+const Sidebar = ({ user, activeTab, setActiveTab, onLock }) => {
   return (
     <aside className="veyra-sidebar">
-      <div className="sidebar-profile-header">
+      {/* Adicionamos o onClick e a classe 'clickable-profile' */}
+      <div 
+        className="sidebar-profile-header clickable-profile" 
+        onClick={onLock}
+        title="Bloquear tela / Tela inicial"
+      >
         <div className="avatar-container">
           <img src={user?.avatar} alt="User" className="mini-avatar" />
           <div className="status-dot"></div>
+          {/* Opcional: Um ícone de cadeado que aparece no hover (via CSS) */}
         </div>
         <div className="user-details">
           <span className="user-name">{user?.name || "Usuário"}</span>
@@ -24,7 +31,6 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
       <div className="sidebar-divider"></div>
 
       <nav className="sidebar-nav">
-        {/* Dashboard */}
         <div 
           className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActiveTab('dashboard')}
@@ -33,7 +39,6 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
           <span>Dashboard</span>
         </div>
 
-        {/* Projetos */}
         <div 
           className={`nav-item ${activeTab === 'projetos' ? 'active' : ''}`}
           onClick={() => setActiveTab('projetos')}
@@ -42,7 +47,6 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
           <span>Projetos</span>
         </div>
 
-        {/* Financeiro - Agora com lógica de Active */}
         <div 
           className={`nav-item ${activeTab === 'financeiro' ? 'active' : ''}`} 
           onClick={() => setActiveTab('financeiro')}
@@ -51,7 +55,6 @@ const Sidebar = ({ user, activeTab, setActiveTab }) => {
           <span>Financeiro</span>
         </div>
         
-        {/* Calendário */}
         <div 
           className={`nav-item ${activeTab === 'calendario' ? 'active' : ''}`} 
           onClick={() => setActiveTab('calendario')}
