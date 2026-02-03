@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import CreditCard from "../../components/UI/CreditCard/CreditCard";
 import Wishlist from "../../components/UI/Wishlist/Wishlist";
-import { FiPlus, FiEdit3 } from 'react-icons/fi';
+import { FiPlus, FiEdit3, FiX } from 'react-icons/fi';
 import "./Finance.css";
 
 const Finance = ({ user }) => {
-  // Pega o nome do usuário logado (App.js -> veyra_user)
   const fullName = `${user?.name || 'Nelson'} ${user?.lastName || 'Dombaxi'}`.toUpperCase();
 
   const [financeData, setFinanceData] = useState(() => {
@@ -24,7 +23,6 @@ const Finance = ({ user }) => {
   const [activeModal, setActiveModal] = useState(null); 
   const [inputValue, setInputValue] = useState("");
 
-  // FUNÇÃO PARA RECARREGAR OS DADOS DO LOCALSTORAGE
   const refreshData = useCallback(() => {
     const saved = localStorage.getItem("@veyra:finance");
     if (saved) {
@@ -38,16 +36,12 @@ const Finance = ({ user }) => {
   }, []);
 
   useEffect(() => {
-    // Escuta mudanças manuais no Storage ou o evento disparado pela Wishlist
     window.addEventListener("storage", refreshData);
-    
-    // Sincroniza sempre o nome atual do usuário e os dados no Storage
     const dataToSave = { 
       ...financeData, 
       cardInfo: { ...financeData.cardInfo, holderName: fullName } 
     };
     localStorage.setItem("@veyra:finance", JSON.stringify(dataToSave));
-
     return () => window.removeEventListener("storage", refreshData);
   }, [financeData, fullName, refreshData]);
 
@@ -55,11 +49,8 @@ const Finance = ({ user }) => {
     const amount = parseFloat(inputValue);
     if (!isNaN(amount) && amount > 0) {
       const newBalance = type === 'add' ? financeData.balance + amount : financeData.balance - amount;
-      
       const updatedData = { ...financeData, balance: newBalance };
       setFinanceData(updatedData);
-      
-      // Notifica outros componentes (como a Dashboard)
       localStorage.setItem("@veyra:finance", JSON.stringify(updatedData));
       window.dispatchEvent(new Event("storage"));
     }
@@ -103,7 +94,6 @@ const Finance = ({ user }) => {
 
         <div className="wishlist-placeholder">
           <div className="section-divider"></div>
-          {/* A Wishlist agora pode atualizar o saldo aqui em cima via EventListener */}
           <Wishlist />
         </div>
       </div>
@@ -111,6 +101,9 @@ const Finance = ({ user }) => {
       {activeModal === 'balance' && (
         <div className="finance-modal-overlay" onClick={() => setActiveModal(null)}>
           <div className="finance-modal" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-x" onClick={() => setActiveModal(null)}>
+              <FiX size={20} />
+            </button>
             <h3>Gerenciar Saldo</h3>
             <input 
               type="number" 
@@ -120,8 +113,8 @@ const Finance = ({ user }) => {
               autoFocus
             />
             <div className="modal-actions">
-              <button className="btn-confirm add" onClick={() => handleUpdateBalance('add')}>Adicionar</button>
-              <button className="btn-confirm sub" onClick={() => handleUpdateBalance('sub')}>Abater</button>
+              <button className="btn-confirm add" onClick={() => handleUpdateBalance('add')}>Confirmar Depósito</button>
+              <button className="btn-confirm sub" onClick={() => handleUpdateBalance('sub')}>Confirmar Retirada</button>
             </div>
           </div>
         </div>
@@ -130,14 +123,17 @@ const Finance = ({ user }) => {
       {activeModal === 'theme' && (
         <div className="finance-modal-overlay" onClick={() => setActiveModal(null)}>
           <div className="finance-modal" onClick={e => e.stopPropagation()}>
+            <button className="modal-close-x" onClick={() => setActiveModal(null)}>
+              <FiX size={20} />
+            </button>
             <h3>Estilo do Cartão</h3>
-            <p style={{color: '#71717a', marginBottom: '20px', fontSize: '0.9rem'}}>Escolha a cor da sua conta Premium</p>
+            <p className="modal-desc">Escolha a nova aparência do seu cartão Veyra</p>
             <div className="theme-grid">
-              <button className="theme-opt black" onClick={() => changeTheme('black')}>Original Black</button>
+              <button className="theme-opt black" onClick={() => changeTheme('black')}>Veyra Dark</button>
               <button className="theme-opt purple" onClick={() => changeTheme('purple')}>Veyra Purple</button>
-              <button className="theme-opt blue" onClick={() => changeTheme('blue')}>Executive Blue</button>
+              <button className="theme-opt blue" onClick={() => changeTheme('blue')}>Veyra Blue</button>
+              <button className="theme-opt rose" onClick={() => changeTheme('rose')}>Veyra Rose</button>
             </div>
-            <button className="btn-cancel" onClick={() => setActiveModal(null)} style={{marginTop: '20px'}}>Voltar</button>
           </div>
         </div>
       )}

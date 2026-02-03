@@ -14,7 +14,6 @@ const StartScreen = ({ user, onStart, onCreateAnother, canCreateAnother }) => {
         <div className="start-actions">
           <button className="btn btn-primary" onClick={onStart}>Iniciar</button>
           
-          {/* Agora este botão chama a função de logout/reset */}
           {canCreateAnother && (
             <button className="btn btn-ghost" onClick={onCreateAnother}>
               Criar outra conta

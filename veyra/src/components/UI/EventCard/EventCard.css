@@ -39,10 +39,9 @@
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
 }
 
-/* Nome do Evento ABAIXO do Quadrado */
 .event-texts {
   position: absolute;
-  bottom: -35px; /* Espaço entre o card e o texto */
+  bottom: -35px;
   width: 160px;
   text-align: center;
 }

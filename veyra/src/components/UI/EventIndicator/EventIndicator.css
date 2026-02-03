@@ -11,10 +11,7 @@
 
 .huge-emoji {
   font-size: 2.6rem; 
-  /* Apenas uma sombra leve para dar profundidade, sem brilho colorido */
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
   z-index: 3;
   position: relative;
 }
-
-/* Removido o emoji-glow e as animações de neon */

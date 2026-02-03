@@ -24,7 +24,7 @@
   background: var(--modal-bg);
   border: 1px solid var(--modal-border);
   padding: 32px;
-  border-radius: 24px; /* Mais arredondado como nas fotos */
+  border-radius: 24px;
   width: 90%;
   max-width: 420px;
   min-height: 480px;
@@ -58,7 +58,6 @@
   color: #fff;
 }
 
-/* Modal View e Lixeira */
 .modal-view-container {
   flex: 1;
   display: flex;
@@ -74,7 +73,6 @@
   padding: 20px 0;
 }
 
-/* Lixeira Flutuante - Fix do Bug */
 .delete-btn-overlay {
   position: absolute;
   top: -10px;
@@ -122,7 +120,6 @@
   margin: 0 auto;
 }
 
-/* Navegação */
 .modal-navigation {
   display: flex;
   align-items: center;
@@ -167,7 +164,6 @@
   border-radius: 10px;
 }
 
-/* Estilos do formulário permanecem os mesmos, mas com ajustes de espaçamento */
 .input-group { margin-bottom: 18px; text-align: left; }
 .input-group label { display: block; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
 .styled-input { width: 100%; background: var(--input-bg); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; color: #fff; font-size: 1rem; outline: none; transition: 0.2s; }

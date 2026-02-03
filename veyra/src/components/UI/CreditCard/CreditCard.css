@@ -2,19 +2,18 @@
   width: 100%;
   max-width: 400px;
   height: 240px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); /* Preto Sólido/Profundo */
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   border-radius: 20px;
   padding: 25px;
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Borda sutil para definir o shape */
+  border: 1px solid rgba(255, 255, 255, 0.05);
   font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
 
-/* Efeito de textura fosca */
 .mastercard-black-card::before {
   content: '';
   position: absolute;
@@ -38,7 +37,6 @@
   text-transform: uppercase;
 }
 
-/* O CHIP DOURADO */
 .card-chip {
   width: 45px;
   height: 35px;
@@ -56,7 +54,6 @@
   border-radius: 2px;
 }
 
-/* SEÇÃO DE SALDO */
 .card-balance-section {
   margin-top: 10px;
 }
@@ -74,7 +71,6 @@
   letter-spacing: 1px;
 }
 
-/* RODAPÉ DO CARTÃO */
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -100,7 +96,6 @@
   text-transform: uppercase;
 }
 
-/* LOGO MASTERCARD ORIGINAL */
 .mastercard-logo {
   display: flex;
   position: relative;
@@ -127,26 +122,33 @@
   opacity: 0.9;
 }
 
-/* ... (Mantenha seu código anterior e adicione isso no fim) */
-
-/* TEMAS DE CORES */
 .card-theme-black {
   background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
 }
 
 .card-theme-purple {
-  background: linear-gradient(135deg, #2D1B69 0%, #120B2E 100%);
-  border-color: rgba(107, 70, 193, 0.3);
+  background: linear-gradient(135deg, #3B0764 0%, #1c0533 100%);
+  border-color: rgba(147, 51, 234, 0.3);
 }
 
 .card-theme-blue {
-  background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
-  border-color: rgba(30, 64, 175, 0.3);
+  background: linear-gradient(135deg, #172554 0%, #020617 100%);
+  border-color: rgba(59, 130, 246, 0.3);
 }
 
-/* Efeito Glow para os temas coloridos */
-.card-theme-purple::after {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(107, 70, 193, 0.1) 0%, transparent 70%);
-  pointer-events: none;
+.card-theme-rose {
+  background: linear-gradient(135deg, #be185d 0%, #831843 100%);
+  border-color: rgba(236, 72, 153, 0.3);
 }
+
+.card-theme-purple::after,
+.card-theme-blue::after,
+.card-theme-rose::after {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.card-theme-purple::after { background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 60%); }
+.card-theme-blue::after { background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%); }
+.card-theme-rose::after { background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 60%); }

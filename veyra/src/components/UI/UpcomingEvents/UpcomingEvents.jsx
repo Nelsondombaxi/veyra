@@ -6,7 +6,6 @@ import './UpcomingEvents.css';
 
 const UpcomingEvents = () => {
   const { getUpcomingEvents } = useCalendarEvents();
-  // Sua lógica: pega os 5 próximos eventos dinamicamente
   const events = getUpcomingEvents(5);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -14,7 +13,7 @@ const UpcomingEvents = () => {
     if (events.length <= 1) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % events.length);
-    }, 4000); // Troca a cada 4 segundos
+    }, 4000);
     return () => clearInterval(interval);
   }, [events.length]);
 
@@ -25,7 +24,6 @@ const UpcomingEvents = () => {
       <div className="carousel-track-flat">
         <AnimatePresence mode="wait">
           {events.map((event, index) => {
-            // Calcula a posição para que o ativo fique no centro
             const isCenter = index === activeIndex;
             
             return (

@@ -4,7 +4,7 @@ import ProjectCard from '../ProjectCard/ProjectCard';
 import './AutoCarousel.css';
 
 const AutoCarousel = ({ items }) => {
-  const INTERVAL_TIME = 5000; // 5 segundos
+  const INTERVAL_TIME = 5000;
   const [currentIndex, setCurrentIndex] = useState(() => {
     try {
       if (!items || items.length === 0) return 0;

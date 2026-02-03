@@ -1,7 +1,7 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: dark;
-  background-color: #00040E; /* O fundo escuro que você prefere */
+  background-color: #00040E;
   color: rgba(255, 255, 255, 0.87);
 }
 
@@ -10,5 +10,5 @@ body, html, #root {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  overflow: hidden; /* Trava a tela para não ter scroll na sidebar */
+  overflow: hidden;
 }

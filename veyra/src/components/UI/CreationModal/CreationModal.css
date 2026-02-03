@@ -10,7 +10,7 @@
   justify-content: center;
   z-index: 2000;
   backdrop-filter: blur(8px);
-  padding: 20px; /* Garante que não encoste nas bordas no mobile */
+  padding: 20px;
 }
 
 .modal-content {
@@ -23,12 +23,9 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   max-height: 90vh;
   overflow-y: auto;
-  
-  /* ESSENCIAL: Faz o calendário nativo do navegador abrir em modo escuro */
   color-scheme: dark; 
 }
 
-/* Scrollbar mais bonita */
 .modal-content::-webkit-scrollbar {
   width: 6px;
 }
@@ -154,7 +151,7 @@
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  border: 3px solid transparent; /* Borda transparente para manter o tamanho */
+  border: 3px solid transparent;
   transition: transform 0.2s;
 }
 
@@ -165,7 +162,7 @@
 
 .datetime-row {
   display: grid;
-  grid-template-columns: 1.5fr 1fr; /* Mais espaço para data */
+  grid-template-columns: 1.5fr 1fr;
   gap: 16px;
   margin-bottom: 10px;
 }
@@ -175,16 +172,15 @@
 .inner-icon { 
   position: absolute; 
   right: 14px; 
-  top: 22px; /* Ajuste fino baseado no input */
+  top: 22px;
   transform: translateY(-50%); 
   color: #71717a; 
   pointer-events: none; 
 }
 
-/* Correção específica para os inputs de data/hora não ficarem estranhos */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  opacity: 0; /* Esconde o ícone nativo para usar o seu ícone customizado se quiser, ou remova isso */
+  opacity: 0;
   width: 100%;
   height: 100%;
   position: absolute;

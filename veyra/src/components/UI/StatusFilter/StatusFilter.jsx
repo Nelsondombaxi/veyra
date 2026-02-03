@@ -2,7 +2,6 @@ import React from 'react';
 import './StatusFilter.css';
 
 const StatusFilter = ({ activeFilter, onFilterChange }) => {
-  // Mantemos os nomes que aparecem na interface
   const filters = ['Todos', 'Metas', 'Tarefas', 'Treinos', 'Objetivos', 'Lembretes'];
 
   return (

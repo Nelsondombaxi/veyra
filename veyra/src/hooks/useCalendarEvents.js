@@ -52,7 +52,7 @@ export const useCalendarEvents = () => {
       if (realIndex >= 0 && realIndex < currentDayEvents.length) {
         currentDayEvents.splice(realIndex, 1);
       } else {
-        return prev; // Se o index for inválido, não faz nada
+        return prev;
       }
 
       if (currentDayEvents.length === 0) {

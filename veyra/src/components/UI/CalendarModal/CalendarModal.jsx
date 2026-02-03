@@ -17,13 +17,13 @@ const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent, onDeleteE
   const isAdding = currentIndex === events.length;
 
   const handleDelete = (index) => {
-    // Chamamos a função passando o index. A dateKey já está no escopo do pai ou passada aqui.
+
     onDeleteEvent(index); 
     
     if (events.length <= 1) {
       onClose();
     } else {
-      // Ajusta o index para não cair em buraco vazio
+
       setCurrentIndex(prev => Math.max(0, prev - 1));
     }
   };
@@ -56,7 +56,7 @@ const CalendarModal = ({ isOpen, onClose, events, dateKey, onAddEvent, onDeleteE
               event={events[currentIndex]}
               onNext={() => setCurrentIndex(prev => prev + 1)}
               onPrev={() => setCurrentIndex(prev => Math.max(0, prev - 1))}
-              onDelete={() => handleDelete(currentIndex)} // 🔥 Passa o index atual corretamente
+              onDelete={() => handleDelete(currentIndex)}
               currentIndex={currentIndex}
               totalEvents={events.length}
             />

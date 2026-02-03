@@ -1,10 +1,8 @@
-/* Button.css */
 .veyra-button {
   width: 100%;
   padding: 16px;
   border-radius: 16px;
   border: none;
-  /* Gradiente mais rico */
   background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
   color: white;
   font-weight: 700;
@@ -17,7 +15,6 @@
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 }
 
-/* Efeito de brilho ao passar o mouse */
 .veyra-button::after {
   content: '';
   position: absolute;

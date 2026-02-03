@@ -1,8 +1,5 @@
-/* Calendar.css */
-
-/* Variáveis para facilitar ajustes */
 :root {
-  --primary-color: #8b5cf6; /* Roxo do seu tema */
+  --primary-color: #8b5cf6;
   --primary-glow: rgba(139, 92, 246, 0.5);
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
@@ -14,10 +11,9 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  overflow: hidden; /* Impede scroll indesejado durante animação */
+  overflow: hidden;
 }
 
-/* Dias da Semana (D S T Q...) */
 .week-days-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -32,12 +28,12 @@
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding-left: 12px; /* Alinhar com o padding do dia */
+  padding-left: 12px;
 }
 
 .calendar-grid-wrapper {
   flex: 1;
-  position: relative; /* Para o AnimatePresence funcionar bem */
+  position: relative;
   overflow: hidden;
 }
 
@@ -45,12 +41,11 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 12px; /* Espaço entre os cartões */
+  gap: 12px;
   height: 100%;
-  padding: 4px; /* Espaço para o glow não cortar */
+  padding: 4px; 
 }
 
-/* Estilo Base do Dia */
 .calendar-day {
   position: relative;
   display: flex;
@@ -59,25 +54,23 @@
   padding: 14px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 16px; /* Bordas arredondadas modernas */
+  border-radius: 16px;
   transition: all 0.2s ease;
   cursor: pointer;
   height: 100%;
   min-height: 80px;
 }
 
-/* Dias Vazios (início do mês) */
 .calendar-day.empty {
   background: transparent;
   border: none;
   pointer-events: none;
 }
 
-/* Efeito Hover nos dias normais */
 .calendar-day:not(.empty):hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px); /* Leve flutuação */
+  transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -88,7 +81,6 @@
   z-index: 2;
 }
 
-/* O DIA ATUAL (Destaque) */
 .calendar-day.is-today {
   background: linear-gradient(135deg, var(--primary-color) 0%, #6d28d9 100%);
   border: 1px solid var(--primary-color);
@@ -100,7 +92,6 @@
   color: #fff;
 }
 
-/* Indicador visual de "Hoje" (bolinha opcional) */
 .calendar-day.is-today::after {
   content: 'Hoje';
   position: absolute;

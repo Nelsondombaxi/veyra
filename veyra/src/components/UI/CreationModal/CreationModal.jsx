@@ -14,7 +14,6 @@ const colors = ['#6B46C1', '#EC4899', '#3B82F6', '#10B981', '#F59E0B'];
 
 const CreationModal = ({ isOpen, onClose, onSave }) => {
   const [title, setTitle] = useState('');
-  // CORREÇÃO: O ID é 'meta', não 'metas'
   const [selectedIcon, setSelectedIcon] = useState('meta'); 
   const [selectedColor, setSelectedColor] = useState('#6B46C1');
   const [isPriority, setIsPriority] = useState(false);
@@ -25,7 +24,6 @@ const CreationModal = ({ isOpen, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Formata apenas se tiver data
     const formattedTime = date ? `${date.split('-').reverse().join('/')} ${time}` : time;
     
     onSave({ 

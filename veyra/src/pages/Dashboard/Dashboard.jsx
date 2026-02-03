@@ -65,12 +65,10 @@ const Dashboard = ({ user }) => {
       </header>
 
       <main className="area-conteudo-central">
-        {/* SEÇÃO PROJETOS */}
         <Showcase title="Projetos em Destaque" icon={FiLayout}>
           <AutoCarousel items={priorityProjects} />
         </Showcase>
 
-        {/* SEÇÃO FINANCEIRO */}
         <Showcase title="Financeiro" icon={FiDollarSign}>
           <div className="dash-finance-center">
             <CreditCard 
@@ -84,7 +82,6 @@ const Dashboard = ({ user }) => {
           </div>
         </Showcase>
 
-        {/* SEÇÃO CALENDÁRIO: Agora com Feed de Próximos Eventos */}
         <Showcase title="Calendário" icon={FiCalendar}>
           <div className="dash-calendar-content">
             <UpcomingEvents />

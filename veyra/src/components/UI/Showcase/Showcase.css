@@ -18,7 +18,7 @@
 }
 
 .showcase-icon {
-  color: #6B46C1; /* Roxo da marca */
+  color: #6B46C1;
   font-size: 20px;
 }
 
@@ -31,7 +31,6 @@
   margin: 0;
 }
 
-/* A linha que atravessa a tela para dar o efeito de vitrine */
 .showcase-line {
   height: 1px;
   flex-grow: 1;
@@ -42,5 +41,5 @@
   width: 100%;
   padding: 10px 0;
   display: flex;
-  justify-content: center; /* Centraliza o carrossel ou conteúdo */
+  justify-content: center;
 }

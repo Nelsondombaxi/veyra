@@ -7,11 +7,9 @@ import {
   PiListChecksBold
 } from "react-icons/pi";
 
-// Adicionamos 'onLock' nas props
 const Sidebar = ({ user, activeTab, setActiveTab, onLock }) => {
   return (
     <aside className="veyra-sidebar">
-      {/* Adicionamos o onClick e a classe 'clickable-profile' */}
       <div 
         className="sidebar-profile-header clickable-profile" 
         onClick={onLock}
@@ -20,7 +18,6 @@ const Sidebar = ({ user, activeTab, setActiveTab, onLock }) => {
         <div className="avatar-container">
           <img src={user?.avatar} alt="User" className="mini-avatar" />
           <div className="status-dot"></div>
-          {/* Opcional: Um ícone de cadeado que aparece no hover (via CSS) */}
         </div>
         <div className="user-details">
           <span className="user-name">{user?.name || "Usuário"}</span>

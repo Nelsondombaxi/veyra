@@ -4,25 +4,21 @@ import AvatarUpload from "../AvatarUpload/AvatarUpload";
 import Button from "../Button/button";
 import "./ProfileModal.css";
 
-// Recebemos a prop onLoginSuccess
 const ProfileModal = ({ onLoginSuccess }) => {
   const saved = typeof window !== 'undefined' ? localStorage.getItem("veyra_user") : null;
   const [isRegistered, setIsRegistered] = useState(() => !!saved);
   const [user, setUser] = useState(() => (saved ? JSON.parse(saved) : { name: "", surname: "", role: "", avatar: "" }));
 
-  // Função para salvar e JÁ ENTRAR
   const handleSave = () => {
     if (user?.name && user?.role) {
       localStorage.setItem("veyra_user", JSON.stringify(user));
-      onLoginSuccess(user); // Faz o App trocar para a Dashboard na hora
-    } else {
+      onLoginSuccess(user);
       alert("Preencha seu nome e função!");
     }
   };
 
-  // Função para entrar quando já tem cadastro
   const handleEnter = () => {
-    onLoginSuccess(user); // Faz o App trocar para a Dashboard na hora
+    onLoginSuccess(user);
   };
 
   const handleReset = () => {
@@ -51,7 +47,6 @@ const ProfileModal = ({ onLoginSuccess }) => {
         </div>
 
         <div className="modal-footer">
-          {/* Usamos o handleEnter aqui */}
           <Button label="Acessar Sistema" onClick={handleEnter} />
           <button className="change-profile-btn" onClick={handleReset}>
             Trocar de Perfil
@@ -93,7 +88,6 @@ const ProfileModal = ({ onLoginSuccess }) => {
       </div>
 
       <div className="modal-footer">
-        {/* Alterado para handleSave */}
         <Button label="Criar Perfil" onClick={handleSave} />
       </div>
     </div>

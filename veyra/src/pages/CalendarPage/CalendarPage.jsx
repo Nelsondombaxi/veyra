@@ -13,7 +13,6 @@ const CalendarPage = () => {
         </header>
 
         <section className="main-calendar-area">
-          {/* O componente inteligente que desenhamos entra aqui */}
           <Calendar />
         </section>
 

@@ -6,7 +6,7 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx"
 import Projects from "./pages/Projects/Projects.jsx" 
 import Finance from "./pages/Finance/Finance.jsx" 
 import CalendarPage from "./pages/CalendarPage/CalendarPage.jsx" 
-import StartScreen from "./components/StartScreen/StartScreen.jsx"
+import StartScreen from "./components/UI/StartScreen/StartScreen.jsx"
 
 function App() {
   const saved = typeof window !== 'undefined' ? localStorage.getItem('veyra_user') : null
@@ -47,7 +47,6 @@ function App() {
         setActiveTab={setActiveTab}
         onLock={handleLockScreen}
       >
-        {/* A StartScreen agora só aparece se 'showStart' for true (via clique no perfil) */}
         {showStart ? (
           <StartScreen 
             user={user} 

@@ -2,9 +2,6 @@ import React from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { motion as Motion } from 'framer-motion';
 
-// Estilos inline ou no CSS, mas vamos focar na estrutura
-// Sugiro adicionar isso ao CalendarPage.css ou criar um CalendarHeader.css
-
 const CalendarHeader = ({ currentMonth, currentYear, onPrevMonth, onNextMonth }) => {
   const months = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -28,7 +25,6 @@ const CalendarHeader = ({ currentMonth, currentYear, onPrevMonth, onNextMonth })
   );
 };
 
-// Componente de botãozinho reutilizável com animação
 const NavButton = ({ onClick, icon }) => (
   <Motion.button 
     onClick={onClick}

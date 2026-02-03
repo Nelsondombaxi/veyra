@@ -5,7 +5,6 @@ import './EventIndicator.css';
 const EventIndicator = ({ events = [] }) => {
   const [index, setIndex] = useState(0);
 
-  // Carrossel automático se houver mais de um evento no dia
   useEffect(() => {
     if (events.length <= 1) return;
     const interval = setInterval(() => {

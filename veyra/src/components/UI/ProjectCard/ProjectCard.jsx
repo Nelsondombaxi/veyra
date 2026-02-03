@@ -51,19 +51,16 @@ const ProjectCard = ({ title, category, color, time, isPriority, onDelete, hideD
       className={`project-card ${isPriority ? 'priority-border' : ''}`}
       style={{ '--card-color': color }}
     >
-      {/* Lado Direito: Ícone Gigante Decorativo (Silhueta) */}
       <div className="card-watermark-icon">
         {iconMap[normalizedCategory]}
       </div>
 
-      {/* Botão Deletar (Fica na parte colorida) */}
       {!hideDelete && (
         <button className="delete-btn-card" onClick={onDelete}>
           <FiTrash2 />
         </button>
       )}
 
-      {/* Lado Esquerdo: Conteúdo Principal */}
       <div className="card-logo-badge">
         {iconMap[normalizedCategory] || <FiStar />}
       </div>
