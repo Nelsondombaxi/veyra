@@ -1,3 +1,4 @@
+
 :root {
   --primary-color: #8b5cf6;
   --primary-glow: rgba(139, 92, 246, 0.5);
@@ -231,5 +232,60 @@
 
   .calendar-day.is-today {
     box-shadow: 0 0 10px var(--primary-glow);
+  }
+}
+
+@media (max-width: 360px) {
+  .calendar-page-wrapper {
+    padding: 8px;    
+    height: 100dvh;   
+  }
+
+  .main-calendar-area {
+    padding: 15px;     
+    border-radius: 10px;
+  }
+
+  .week-days-row {
+    margin-bottom: 5px;
+  }
+
+  .week-day {
+    font-size: 0.6rem; 
+    letter-spacing: 0;
+  }
+
+  .calendar-grid {
+    gap: 4px;         
+    padding: 0;
+  }
+
+  .calendar-day {
+    padding: 5px 5px; 
+    border-radius: 8px;
+    min-height: 55px; 
+    align-items: center; 
+    justify-content: center;
+  }
+
+  .day-number {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .calendar-day span, 
+  .calendar-day img, 
+  .calendar-day i {
+    font-size: 1rem !important; 
+    margin-top: 20px;
+  }
+
+  .calendar-day.is-today::after {
+    content: 'Hoje';
+    position: relative;
+    bottom: 0;
+    left: 0;
+    font-size: 0.5rem;
+    margin-top: 10px;
   }
 }
