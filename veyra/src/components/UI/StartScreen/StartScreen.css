@@ -77,3 +77,44 @@
   font-size: 11px;
   text-align: center;
 }
+
+@media (max-width: 480px) {
+  .startscreen-card {
+    width: 90% !important;
+    max-width: 340px !important; 
+    padding: 22px !important;
+    gap: 10px !important;
+  }
+
+  .start-avatar img {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .start-title {
+    font-size: 18px !important;
+    margin-top: 5px !important;
+  }
+
+  .start-sub {
+    font-size: 12px !important;
+    padding: 0 10px;
+  }
+
+  .start-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-top: 15px !important;
+  }
+
+  .btn {
+    width: 100% !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+
+  .start-note {
+    font-size: 10px !important;
+    margin-top: 10px !important;
+  }
+}

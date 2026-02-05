@@ -47,3 +47,43 @@
   font-size: 14px;
   padding: 40px;
 }
+
+@media (max-width: 480px) {
+  .carousel-container {
+    min-height: 180px !important;
+    padding: 10px 0 !important;
+  }
+
+  .carousel-active-item {
+    padding: 0 15px !important;
+  }
+
+  .carousel-active-item .project-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: scale(1) !important; 
+    box-shadow: 0 10px 25px rgba(107, 70, 193, 0.2) !important;
+    border-radius: 16px !important;
+  }
+
+  .carousel-indicators {
+    gap: 10px !important;
+    margin-top: 15px !important;
+  }
+
+  .indicator {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .indicator.active {
+    width: 22px !important;
+    background: #8b5cf6 !important;
+  }
+
+  .carousel-empty {
+    font-size: 13px !important;
+    padding: 20px !important;
+    text-align: center !important;
+  }
+}

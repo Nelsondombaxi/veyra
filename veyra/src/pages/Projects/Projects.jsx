@@ -79,9 +79,9 @@ const Projects = () => {
           ) : (
             <div className="empty-state-box">
               {searchTerm ? (
-                <p>Nenhum item começa com "{searchTerm}".</p>
+                <p>Nenhum projeto começa com "{searchTerm}".</p>
               ) : (
-                <p>Nenhum item encontrado em "{activeFilter}".</p>
+                <p>Nenhum projeto encontrado em "{activeFilter}".</p>
               )}
             </div>
           )}

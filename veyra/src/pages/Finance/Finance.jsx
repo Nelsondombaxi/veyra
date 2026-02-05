@@ -5,7 +5,7 @@ import { FiPlus, FiEdit3, FiX } from 'react-icons/fi';
 import "./Finance.css";
 
 const Finance = ({ user }) => {
-  const fullName = `${user?.name || 'Nelson'} ${user?.lastName || 'Dombaxi'}`.toUpperCase();
+  const fullName = `${user?.name || ''} ${user?.surname || ''}`.trim().toUpperCase();
 
   const [financeData, setFinanceData] = useState(() => {
     const saved = localStorage.getItem("@veyra:finance");
@@ -14,10 +14,14 @@ const Finance = ({ user }) => {
       return {
         balance: parsed.balance || 0,
         theme: parsed.theme || 'black',
-        cardInfo: { bankName: "VEYRA BANK", holderName: fullName }
+        cardInfo: { bankName: "VEYRA BANK", holderName: fullName || "TITULAR VEYRA" }
       };
     }
-    return { balance: 0, theme: 'black', cardInfo: { bankName: "VEYRA BANK", holderName: fullName } };
+    return { 
+      balance: 0, 
+      theme: 'black', 
+      cardInfo: { bankName: "VEYRA BANK", holderName: fullName || "TITULAR VEYRA" } 
+    };
   });
 
   const [activeModal, setActiveModal] = useState(null); 
@@ -37,11 +41,13 @@ const Finance = ({ user }) => {
 
   useEffect(() => {
     window.addEventListener("storage", refreshData);
+    
     const dataToSave = { 
       ...financeData, 
-      cardInfo: { ...financeData.cardInfo, holderName: fullName } 
+      cardInfo: { ...financeData.cardInfo, holderName: fullName || "TITULAR VEYRA" } 
     };
     localStorage.setItem("@veyra:finance", JSON.stringify(dataToSave));
+    
     return () => window.removeEventListener("storage", refreshData);
   }, [financeData, fullName, refreshData]);
 

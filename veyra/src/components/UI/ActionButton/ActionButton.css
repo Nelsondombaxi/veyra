@@ -6,12 +6,14 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 15px rgba(107, 70, 193, 0.3);
+  white-space: nowrap;
 }
 
 .veyra-action-button:hover {
@@ -22,4 +24,47 @@
 
 .action-icon {
   font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+  .veyra-action-button {
+    padding: 12px 24px;
+    font-size: 15px;
+    gap: 10px;
+  }
+  
+  .action-icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .veyra-action-button {
+    width: 100%;  
+    padding: 14px 20px;
+    font-size: 16px;   
+    border-radius: 12px;
+    justify-content: center;
+  }
+
+  .action-icon {
+    font-size: 22px;   
+  }
+
+  .veyra-action-button:hover {
+    transform: none;
+    background: #6B46C1;
+  }
+  
+  .veyra-action-button:active {
+    background: #5a39a3;
+    transform: scale(0.98);
+  }
+}
+
+@media (min-width: 1600px) {
+  .veyra-action-button {
+    padding: 14px 30px;
+    font-size: 16px;
+  }
 }

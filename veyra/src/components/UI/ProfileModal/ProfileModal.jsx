@@ -10,10 +10,14 @@ const ProfileModal = ({ onLoginSuccess }) => {
   const [user, setUser] = useState(() => (saved ? JSON.parse(saved) : { name: "", surname: "", role: "", avatar: "" }));
 
   const handleSave = () => {
-    if (user?.name && user?.role) {
+    // CORREÇÃO: Agora verifica se Nome, Sobrenome E Função foram preenchidos
+    if (user?.name && user?.surname && user?.role) {
       localStorage.setItem("veyra_user", JSON.stringify(user));
       onLoginSuccess(user);
-      alert("Preencha seu nome e função!");
+      // O alert de erro foi removido daqui porque os dados estão corretos
+    } else {
+      // O alert agora só aparece se faltar preencher algo
+      alert("Por favor, preencha o Nome, Sobrenome e a sua Função!");
     }
   };
 
@@ -27,6 +31,7 @@ const ProfileModal = ({ onLoginSuccess }) => {
     setUser({ name: "", surname: "", role: "", avatar: "" });
   };
 
+  // MODO: BEM-VINDO (Quando já tem cadastro)
   if (isRegistered) {
     return (
       <div className="profile-modal welcome-mode">
@@ -42,6 +47,7 @@ const ProfileModal = ({ onLoginSuccess }) => {
         </div>
 
         <div className="welcome-text">
+          {/* Mostra Nome e Sobrenome dinâmicos */}
           <h3>{user?.name} {user?.surname}</h3>
           <span>{user?.role}</span>
         </div>
@@ -56,6 +62,7 @@ const ProfileModal = ({ onLoginSuccess }) => {
     );
   }
 
+  // MODO: REGISTO (Primeiro acesso)
   return (
     <div className="profile-modal">
       <header className="modal-header">

@@ -133,3 +133,54 @@
 .change-profile-btn:hover {
   color: #ef4444;
 }
+
+@media (max-width: 480px) {
+  .profile-modal {
+    width: 92% !important; /* Ocupa quase a tela toda, mas com respiro */
+    padding: 35px 20px !important; /* Reduzi o padding para o conteúdo não ser esmagado */
+    max-width: none !important;
+  }
+
+  .modal-header {
+    margin: 0 0 20px 0 !important; /* Removendo o margin-left de 65px que tirava o centro */
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .modal-title {
+    font-size: 26px !important; /* Título menor para caber em uma linha */
+    margin: 0 0 8px 0 !important; /* Removendo o margin-left de 40px */
+    letter-spacing: -0.5px !important;
+  }
+
+  .modal-subtitle {
+    font-size: 13px !important;
+    max-width: 250px;
+    margin: 0 auto !important;
+  }
+
+  .avatar-display-final {
+    width: 120px !important; /* Avatar um pouco menor para telas pequenas */
+    height: 120px !important;
+    box-shadow: 0 0 30px rgba(107, 70, 193, 0.4) !important; /* Mantendo o brilho roxo do tema */
+  }
+
+  .welcome-text h3 {
+    font-size: 20px !important;
+    margin-top: 12px !important;
+  }
+
+  .welcome-text span {
+    font-size: 10px !important;
+    padding: 3px 10px !important;
+  }
+
+  .form-group {
+    gap: 15px !important;
+  }
+
+  .change-profile-btn {
+    font-size: 12px !important;
+    margin-top: 15px !important;
+  }
+}

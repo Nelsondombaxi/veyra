@@ -1,3 +1,38 @@
+/* --- CONTAINER E WRAPPER --- */
+.finance-page-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.finance-content-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finance-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.finance-header h1 { font-size: 2.2rem; margin-bottom: 10px; color: #fff; }
+.finance-header p { color: #71717a; }
+
+.card-management-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  width: 100%;
+  margin-top: 5px;
+}
+
 .mastercard-black-card {
   width: 100%;
   max-width: 400px;
@@ -49,27 +84,10 @@
   padding: 5px;
 }
 
-.chip-line {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-}
-
-.card-balance-section {
-  margin-top: 10px;
-}
-
-.balance-label {
-  font-size: 0.65rem;
-  color: #888;
-  letter-spacing: 1.5px;
-  margin-bottom: 5px;
-}
-
-.balance-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
+.chip-line { border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 2px; }
+.card-balance-section { margin-top: 10px; }
+.balance-label { font-size: 0.65rem; color: #888; letter-spacing: 1.5px; margin-bottom: 5px; }
+.balance-value { font-size: 1.8rem; font-weight: 700; letter-spacing: 1px; }
 
 .card-footer {
   display: flex;
@@ -78,77 +96,64 @@
   margin-top: 25px;
 }
 
-.holder-info {
+.holder-info { display: flex; flex-direction: column; }
+.holder-label { font-size: 0.55rem; color: #888; letter-spacing: 1px; }
+.holder-name { font-size: 0.9rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+
+.mastercard-logo { display: flex; position: relative; width: 50px; height: 30px; }
+.circle { width: 30px; height: 30px; border-radius: 50%; }
+.red { background: #eb001b; position: absolute; left: 0; }
+.orange { background: #f79e1b; position: absolute; right: 0; opacity: 0.9; }
+
+.card-theme-black { background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); }
+.card-theme-purple { background: linear-gradient(135deg, #3B0764 0%, #1c0533 100%); border-color: rgba(147, 51, 234, 0.3); }
+.card-theme-blue { background: linear-gradient(135deg, #172554 0%, #020617 100%); border-color: rgba(59, 130, 246, 0.3); }
+.card-theme-rose { background: linear-gradient(135deg, #be185d 0%, #831843 100%); border-color: rgba(236, 72, 153, 0.3); }
+
+.card-theme-purple::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; pointer-events: none; opacity: 0.6; background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 60%); }
+.card-theme-blue::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; pointer-events: none; opacity: 0.6; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%); }
+.card-theme-rose::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; pointer-events: none; opacity: 0.6; background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 60%); }
+
+.side-action-btn {
+  background: #18181b;
+  border: 1px solid #27272a;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
 }
 
-.holder-label {
-  font-size: 0.55rem;
-  color: #888;
-  letter-spacing: 1px;
+
+@media (max-width: 1024px) {
+  .card-management-area {
+    gap: 40px; 
+  }
 }
 
-.holder-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
+@media (max-width: 768px) {
+  .card-management-area {
+    flex-direction: column;
+    padding: 5px;
+  }
 
-.mastercard-logo {
-  display: flex;
-  position: relative;
-  width: 50px;
-  height: 30px;
-}
+  .mastercard-black-card {
+    max-width: 340px;
+    height: 200px;
+    padding: 20px;
+  }
 
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
+  .balance-value { font-size: 1.5rem; }
+  .card-header { margin-bottom: 15px; }
 
-.red {
-  background: #eb001b;
-  position: absolute;
-  left: 0;
+  .side-action-btn {
+    width: 70px;
+    height: 50px;
+  }
 }
-
-.orange {
-  background: #f79e1b;
-  position: absolute;
-  right: 0;
-  opacity: 0.9;
-}
-
-.card-theme-black {
-  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-}
-
-.card-theme-purple {
-  background: linear-gradient(135deg, #3B0764 0%, #1c0533 100%);
-  border-color: rgba(147, 51, 234, 0.3);
-}
-
-.card-theme-blue {
-  background: linear-gradient(135deg, #172554 0%, #020617 100%);
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-.card-theme-rose {
-  background: linear-gradient(135deg, #be185d 0%, #831843 100%);
-  border-color: rgba(236, 72, 153, 0.3);
-}
-
-.card-theme-purple::after,
-.card-theme-blue::after,
-.card-theme-rose::after {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-.card-theme-purple::after { background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 60%); }
-.card-theme-blue::after { background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%); }
-.card-theme-rose::after { background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 60%); }

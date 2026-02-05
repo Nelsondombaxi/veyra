@@ -21,3 +21,42 @@
   cursor: pointer;
   transition: z-index 0.3s;
 }
+
+@media (max-width: 768px) {
+  .upcoming-events-container {
+    height: 280px !important; 
+    min-height: 280px !important; 
+    padding: 15px 0 !important;
+  }
+
+  .carousel-track-flat {
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .upcoming-events-container {
+    height: auto !important; 
+    min-height: 350px !important; 
+    padding: 20px 0 !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carousel-track-flat {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 5px !important;
+    padding-left: 20px !important;
+    width: max-content !important;
+  }
+
+  .carousel-item-flat {
+    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}

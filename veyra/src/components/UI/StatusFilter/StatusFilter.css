@@ -3,6 +3,7 @@
   gap: 12px;
   align-items: center;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .filter-chip {
@@ -15,6 +16,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .filter-chip:hover {
@@ -26,4 +28,50 @@
   background: rgba(107, 70, 193, 0.15);
   border-color: #6B46C1;
   color: #9f7aea;
+}
+
+@media (max-width: 1024px) {
+  .veyra-filter-group {
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .filter-chip {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .veyra-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;     
+    margin-top: 15px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .filter-chip {
+    padding: 6px 12px;
+    font-size: 11px; 
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .filter-chip:first-child {
+    min-width: 60px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .veyra-filter-group {
+    gap: 6px;
+  }
+
+  .filter-chip {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
 }

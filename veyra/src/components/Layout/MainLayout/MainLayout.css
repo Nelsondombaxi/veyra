@@ -1,3 +1,4 @@
+/* --- CONFIGURAÇÕES DE LAYOUT --- */
 .main-layout-container {
   display: flex;
   width: 100vw;
@@ -8,6 +9,91 @@
 
 .content-viewport {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  position: relative;
+}
+
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background-color: rgba(13, 13, 15, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1100;
+}
+
+/* --- BOTÃO HAMBÚRGUER COM TIMING SINCRONIZADO --- */
+.hamburger-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger-box {
+  width: 26px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff; /* */
+  border-radius: 4px;
+  /* O segredo está aqui: transição no estado base para o fecho ser igual à abertura */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s ease, 
+              background-color 0.4s ease;
+  will-change: transform, opacity;
+}
+
+/* --- ANIMAÇÃO PARA O X (ROXO) --- */
+.hamburger-btn.active .line.top {
+  transform: translateY(8px) rotate(45deg);
+  background-color: #6B46C1; /* */
+}
+
+.hamburger-btn.active .line.middle {
+  opacity: 0;
+  transform: translateX(-15px);
+}
+
+.hamburger-btn.active .line.bottom {
+  transform: translateY(-8px) rotate(-45deg);
+  background-color: #6B46C1; /* */
+}
+
+.mobile-brand {
+  color: #6B46C1;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 20px;
+}
+
+.page-content-wrapper {
+  flex: 1;
+  width: 100%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .mobile-header { display: flex; }
+  .main-layout-container { flex-direction: column; }
+  .page-content-wrapper { padding-top: 56px; }
 }

@@ -1,3 +1,5 @@
+/* Sidebar.css */
+
 .veyra-sidebar {
   width: 260px;
   height: 100vh;
@@ -6,9 +8,13 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  flex-shrink: 0; 
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1050;
+  position: relative;
 }
 
+/* --- HEADER DO PERFIL --- */
 .sidebar-profile-header {
   display: flex;
   align-items: center;
@@ -35,12 +41,12 @@
 }
 
 .mini-avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px; /* Reduzi um pouco para equilibrar melhor o respiro */
+  height: 50px;
   border-radius: 10px;
   object-fit: cover;
   border: 1.5px solid rgba(107, 70, 193, 0.3);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .sidebar-profile-header:hover .mini-avatar {
@@ -60,11 +66,6 @@
   transition: transform 0.3s ease;
 }
 
-.sidebar-profile-header:hover .status-dot {
-  transform: scale(1.2);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
-}
-
 .user-details {
   display: flex;
   flex-direction: column;
@@ -72,34 +73,30 @@
 
 .user-name {
   color: #ffffff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   transition: color 0.2s;
 }
 
-.sidebar-profile-header:hover .user-name {
-  color: #d6bcfa;
-}
-
 .user-role {
   color: #71717a;
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
 }
 
-/* --- RESTO DO CSS (MANTIDO IGUAL) --- */
+/* --- DIVISOR E NAVEGAÇÃO --- */
 .sidebar-divider {
-  height: 2px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-bottom: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  margin-bottom: 25px;
 }
 
 .sidebar-nav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .nav-item {
@@ -110,14 +107,14 @@
   color: #a1a1aa;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   font-weight: 500;
   font-size: 14px;
 }
 
 .nav-icon {
   font-size: 20px;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
 }
 
 .nav-item:hover {
@@ -126,7 +123,7 @@
 }
 
 .nav-item:hover .nav-icon {
-  transform: translateX(3px);
+  transform: scale(1.1);
 }
 
 .nav-item.active {
@@ -135,16 +132,98 @@
   font-weight: 600;
 }
 
+/* --- FOOTER --- */
 .sidebar-footer {
   margin-top: auto;
-  padding-bottom: 10px;
+  padding: 20px 0 10px;
 }
 
 .brand-logo {
   color: #6B46C1;
-  font-size: 18px;
-  letter-spacing: 4px;
+  font-size: 16px;
+  letter-spacing: 5px;
   font-weight: 900;
-  opacity: 0.4;
+  opacity: 0.5;
   text-align: center;
+}
+
+/* --- ELEMENTOS MOBILE (OVERLAY E FECHAR) --- */
+.mobile-close-btn {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: none;
+  color: #a1a1aa;
+  font-size: 22px;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-close-btn:active {
+  transform: scale(0.9) rotate(90deg);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0px);
+  z-index: 1040;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.sidebar-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(6px);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .veyra-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100dvh; /* Dynamic VH para mobile */
+    transform: translateX(-102%);
+    box-shadow: 20px 0 50px rgba(0,0,0,0.7);
+    visibility: hidden;
+    padding-top: 60px; /* Espaço para o botão de fechar */
+  }
+
+  .veyra-sidebar.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .mobile-close-btn {
+    display: flex;
+  }
+  
+  .nav-item {
+    padding: 16px; /* Target de clique maior no mobile */
+    font-size: 16px;
+  }
+}
+
+/* Ajuste no botão hambúrguer do MainLayout.css para acompanhar o estilo */
+/* Adicione isso se quiser a animação no botão de abrir também */
+.hamburger-btn:active {
+  transform: scale(0.8);
+  transition: transform 0.1s ease;
 }

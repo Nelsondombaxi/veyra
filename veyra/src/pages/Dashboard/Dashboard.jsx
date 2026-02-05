@@ -10,7 +10,7 @@ import UpcomingEvents from "../../components/UI/UpcomingEvents/UpcomingEvents";
 
 const Dashboard = ({ user }) => {
 
-  const fullName = `${user?.name || 'Nelson'} ${user?.lastName || 'Dombaxi'}`.toUpperCase();
+  const fullName = `${user?.name || ''} ${user?.surname || ''}`.trim().toUpperCase() || "TITULAR VEYRA";
 
   const [financialData, setFinancialData] = useState(() => {
     const saved = localStorage.getItem("@veyra:finance");
@@ -68,7 +68,6 @@ const Dashboard = ({ user }) => {
         <Showcase title="Projetos em Destaque" icon={FiLayout}>
           <AutoCarousel items={priorityProjects} />
         </Showcase>
-
         <Showcase title="Financeiro" icon={FiDollarSign}>
           <div className="dash-finance-center">
             <CreditCard 
@@ -81,7 +80,6 @@ const Dashboard = ({ user }) => {
             />
           </div>
         </Showcase>
-
         <Showcase title="Calendário" icon={FiCalendar}>
           <div className="dash-calendar-content">
             <UpcomingEvents />

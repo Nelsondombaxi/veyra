@@ -15,17 +15,6 @@ const CalendarPage = () => {
         <section className="main-calendar-area">
           <Calendar />
         </section>
-
-        <footer className="calendar-footer-info">
-          <div className="info-item">
-            <span className="dot purple"></span>
-            <span>Hoje</span>
-          </div>
-          <div className="info-item">
-            <span className="dot gray"></span>
-            <span>Sem eventos</span>
-          </div>
-        </footer>
       </div>
     </div>
   );

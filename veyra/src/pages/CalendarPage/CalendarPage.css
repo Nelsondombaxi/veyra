@@ -1,3 +1,12 @@
+:root {
+  --primary-color: #8b5cf6;
+  --primary-glow: rgba(139, 92, 246, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --bg-dark: #0f0f11;
+}
+
 .calendar-page-wrapper {
   height: 100vh; 
   padding: 30px;
@@ -21,4 +30,206 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
+}
+
+.calendar-container-mobile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.week-days-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.week-day {
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-left: 12px;
+}
+
+.calendar-grid-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 12px;
+  height: 100%;
+  padding: 4px; 
+}
+
+.calendar-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  height: 100%;
+  min-height: 80px;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+.calendar-day:not(.empty):hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.day-number {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  z-index: 2;
+}
+
+.calendar-day.is-today {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #6d28d9 100%);
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.calendar-day.is-today .day-number {
+  font-weight: 700;
+  color: #fff;
+}
+
+.calendar-day.is-today::after {
+  content: 'Hoje';
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.8;
+  color: white;
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .calendar-page-wrapper {
+    padding: 20px;
+    height: 100vh;
+  }
+
+  .main-calendar-area {
+    padding: 15px;
+  }
+
+  .calendar-grid {
+    gap: 8px;
+  }
+
+  .calendar-day {
+    padding: 10px;
+    align-items: center;
+    min-height: 90px;
+  }
+
+  .week-day {
+    text-align: center;
+    padding-left: 0;
+    font-size: 0.8rem;
+  }
+
+  .calendar-day span, 
+  .calendar-day img, 
+  .calendar-day i {
+    font-size: 2.2rem !important;
+    margin-top: auto;
+    margin-bottom: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .day-number {
+    font-size: 1.3rem;
+    align-self: flex-start;
+    margin-bottom: 5px;
+  }
+
+  .calendar-day.is-today::after {
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .calendar-page-wrapper {
+    padding: 5px;
+    height: 90dvh;
+  }
+
+  .main-calendar-area {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .week-days-row {
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .week-day {
+    font-size: 0.75rem;
+    text-align: center;
+    padding-left: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .calendar-grid {
+    gap: 5px;
+    padding: 0px;
+  }
+
+  .calendar-day {
+    padding: 10px;
+    border-radius: 10px;
+    min-height: unset;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .day-number {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  .calendar-day span, 
+  .calendar-day img, 
+  .calendar-day i {
+    font-size: 1.4rem !important; 
+    line-height: 1.5;
+  }
+
+  .calendar-day.is-today {
+    box-shadow: 0 0 10px var(--primary-glow);
+  }
 }

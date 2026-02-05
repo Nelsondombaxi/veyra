@@ -47,3 +47,34 @@
   color: #f4f4f5;
   text-transform: capitalize;
 }
+
+@media (max-width: 480px) {
+  /* Garante que o widget não estique e mantenha o aspeto de "caixa" */
+  .date-widget-container {
+    padding: 8px 12px !important;
+    gap: 10px !important;
+    width: fit-content !important; /* Essencial para não ocupar a linha toda */
+    margin-left: auto !important; /* Empurra para a direita se estiver num flex */
+    border-width: 2px !important; /* Borda mais fina para ecrãs pequenos */
+  }
+
+  .date-icon-box {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 18px !important; /* Ícone ajustado para o espaço mobile */
+  }
+
+  .date-text-content {
+    margin-top: 0 !important;
+    justify-content: center !important;
+  }
+
+  .date-weekday {
+    font-size: 10px !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .date-full {
+    font-size: 13px !important;
+  }
+}

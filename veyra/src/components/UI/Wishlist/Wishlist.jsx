@@ -129,7 +129,7 @@ const Wishlist = () => {
             <div className="modal-header">
               <div className="modal-title-area">
                 <h3>Novo Desejo</h3>
-                <p>O que você vai conquistar hoje?</p>
+                <p>O que você vai conquistar?</p>
               </div>
               <button className="modal-close-x" onClick={() => setIsModalOpen(false)}>
                 <FiX />
@@ -159,7 +159,7 @@ const Wishlist = () => {
                 />
               </div>
               <button type="submit" className="btn-modal-submit">
-                Confirmar e Adicionar
+                Confirmar
               </button>
             </form>
           </div>

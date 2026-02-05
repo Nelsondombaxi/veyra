@@ -1,3 +1,4 @@
+/* --- BASE: DESKTOP --- */
 .project-card {
   background: linear-gradient(
     115deg, 
@@ -6,7 +7,6 @@
     var(--card-color) 65%, 
     var(--card-color) 100%
   );
-  
   border-radius: 16px;
   min-height: 200px;
   padding: 25px;
@@ -85,7 +85,11 @@
   align-items: center;
   justify-content: center;
 }
-.delete-btn-card:hover { background: rgba(0,0,0,0.4); color: white; }
+
+.delete-btn-card:hover { 
+  background: rgba(0,0,0,0.4); 
+  color: white; 
+}
 
 .card-footer-info {
   display: flex;
@@ -105,4 +109,70 @@
 
 .priority-border {
   border: 2px solid var(--card-color);
+}
+
+@media (max-width: 1024px) {
+  .project-card {
+    min-height: 180px;
+    padding: 20px;
+    background: linear-gradient(
+      115deg, 
+      #18181b 0%, 
+      #18181b 70%, 
+      var(--card-color) 70%, 
+      var(--card-color) 100%
+    );
+  }
+
+  .card-title {
+    font-size: 20px;
+    max-width: 65%;
+  }
+
+  .card-watermark-icon {
+    font-size: 110px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    max-height: auto;
+    min-width: 10px;
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    background: linear-gradient(
+      120deg, 
+      #18181b 0%, 
+      #18181b 60%, 
+      var(--card-color) 60%, 
+      var(--card-color) 100%
+    );
+  }
+
+  .card-title {
+    font-size: 18px;
+    max-width: 55%;
+  }
+
+  .card-logo-badge {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .card-footer-info {
+    font-size: 11px;
+    padding: 5px 10px;
+    max-width: 80%;
+  }
+
+  .delete-btn-card {
+    width: 35px;
+    height: 35px;
+    top: 10px;
+    right: 10px;
+  }
 }
