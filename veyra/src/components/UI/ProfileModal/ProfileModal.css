@@ -134,35 +134,25 @@
   color: #ef4444;
 }
 
-/* =========================================
-   MEDIA QUERIES - SOLUÇÃO DE ALTURA (MOBILE & TABLET)
-   ========================================= */
-
 @media screen and (max-width: 768px) {
   .profile-modal {
-    /* 1. Reduz drasticamente o padding vertical */
     padding: 24px 24px; 
     
-    /* 2. Garante que o modal nunca seja maior que 85% da altura da tela 
-       Isso evita que ele toque na barra de navegação do Android */
     max-height: 85vh; 
     
-    /* 3. Se a tela for muito pequena (ex: celular deitado), 
-       permite rolar o conteúdo dentro do modal */
     overflow-y: auto; 
     
     width: 90%;
-    margin: 0 auto; /* Centraliza */
+    margin: 0 auto;
   }
 
-  /* Ajuste do Header para ocupar menos espaço vertical */
   .modal-header {
-    margin: 0 0 15px 0; /* Reduz margem inferior de 24px para 15px */
+    margin: 0 0 15px 0;
     width: 100%;
   }
 
   .modal-title {
-    font-size: 26px; /* Fonte menor */
+    font-size: 26px;
     margin: 0 0 4px 0;
   }
   
@@ -170,21 +160,19 @@
     font-size: 13px;
   }
 
-  /* O GRANDE VILÃO DA ALTURA: O AVATAR */
-  /* Vamos diminuir o círculo do avatar no mobile */
   .avatar-display-final {
-    width: 100px;  /* Era 140px */
-    height: 100px; /* Era 140px */
-    margin-bottom: 10px; /* Menos espaço abaixo dele */
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
   }
 
 
   .form-group {
-    gap: 12px; /* Era 20px -> Isso economiza muito espaço vertical */
+    gap: 12px;
   }
 
   .form-group input {
-    padding: 10px 15px; /* Se tiver padding grande nos inputs, reduz aqui */
+    padding: 10px 15px;
     font-size: 14px;
   }
 

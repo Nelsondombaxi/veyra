@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FiTrash2, FiPlus, FiShoppingBag, FiCheckCircle, FiCircle, FiX } from 'react-icons/fi';
 import './Wishlist.css';
 
-const Wishlist = () => {
+const Wishlist = ({ globalCurrency = 'AOA' }) => {
   const [items, setItems] = useState(() => {
     const saved = localStorage.getItem("@veyra:wishlist");
     return saved ? JSON.parse(saved) : [];
@@ -12,6 +12,8 @@ const Wishlist = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newItem, setNewItem] = useState({ name: '', price: '' });
 
+  const rates = { AOA: 1, EUR: 0.0011, USD: 0.0012 };
+
   useEffect(() => {
     localStorage.setItem("@veyra:wishlist", JSON.stringify(items));
   }, [items]);
@@ -20,10 +22,13 @@ const Wishlist = () => {
     e.preventDefault();
     if (!newItem.name || !newItem.price) return;
 
+    // Salva sempre na base Kwanza dividindo pela taxa da moeda atual
+    const priceInBase = parseFloat(newItem.price) / rates[globalCurrency];
+
     const item = {
       id: Date.now(),
       name: newItem.name,
-      price: parseFloat(newItem.price),
+      price: priceInBase,
       completed: false
     };
 
@@ -45,7 +50,6 @@ const Wishlist = () => {
       const updatedFinance = { ...financeData, balance: newBalance };
       
       localStorage.setItem("@veyra:finance", JSON.stringify(updatedFinance));
-
       window.dispatchEvent(new Event("storage"));
 
       setItems(items.map(item => 
@@ -62,10 +66,17 @@ const Wishlist = () => {
   };
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('pt-AO', {
+    const converted = value * rates[globalCurrency];
+    const config = {
+      AOA: { locale: 'pt-AO', code: 'AOA' },
+      EUR: { locale: 'pt-PT', code: 'EUR' },
+      USD: { locale: 'en-US', code: 'USD' }
+    }[globalCurrency];
+
+    return new Intl.NumberFormat(config.locale, {
       style: 'currency',
-      currency: 'AOA',
-    }).format(value).replace('AOA', 'Kz');
+      currency: config.code,
+    }).format(converted).replace('AOA', 'Kz');
   };
 
   return (
@@ -73,7 +84,7 @@ const Wishlist = () => {
       <div className="wishlist-header">
         <div className="header-info">
           <h3 className="section-label">FINANCEIRO</h3>
-          <h2>Lista de Compras</h2>
+          <h2>Lista de Compras ({globalCurrency})</h2>
           <p>Gerencie seus desejos e metas de consumo.</p>
           <button className="btn-add-trigger" onClick={() => setIsModalOpen(true)}>
             <FiPlus /> Adicionar Item
@@ -89,7 +100,7 @@ const Wishlist = () => {
       <div className="wishlist-table">
         <div className="table-head">
           <span>ITEM DESCRIÇÃO</span>
-          <span>VALOR (Kz)</span>
+          <span>VALOR ({globalCurrency})</span>
         </div>
 
         <div className="table-body">
@@ -128,7 +139,7 @@ const Wishlist = () => {
           <div className="wish-modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <div className="modal-title-area">
-                <h3>Novo Desejo</h3>
+                <h3>Novo Desejo ({globalCurrency})</h3>
                 <p>O que você vai conquistar?</p>
               </div>
               <button className="modal-close-x" onClick={() => setIsModalOpen(false)}>
@@ -149,7 +160,7 @@ const Wishlist = () => {
                 />
               </div>
               <div className="input-field">
-                <label>VALOR ESTIMADO (Kz)</label>
+                <label>VALOR ESTIMADO ({globalCurrency})</label>
                 <input 
                   type="number" 
                   placeholder="0,00" 

@@ -19,10 +19,11 @@ const Dashboard = ({ user }) => {
       return {
         balance: parsed.balance || 0,
         theme: parsed.theme || 'black',
+        currency: parsed.currency || 'AOA',
         holderName: fullName
       };
     }
-    return { balance: 0, theme: 'black', holderName: fullName };
+    return { balance: 0, theme: 'black', currency: 'AOA', holderName: fullName };
   });
 
   const [priorityProjects, _setPriorityProjects] = useState(() => {
@@ -35,17 +36,16 @@ const Dashboard = ({ user }) => {
   });
 
   useEffect(() => {
-    const handleStorageChange = (e) => {
-      if (e.key === "@veyra:finance") {
-        const saved = localStorage.getItem("@veyra:finance");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          setFinancialData({
-            balance: parsed.balance || 0,
-            theme: parsed.theme || 'black',
-            holderName: fullName
-          });
-        }
+    const handleStorageChange = () => {
+      const saved = localStorage.getItem("@veyra:finance");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setFinancialData({
+          balance: parsed.balance || 0,
+          theme: parsed.theme || 'black',
+          currency: parsed.currency || 'AOA',
+          holderName: fullName
+        });
       }
     };
 
@@ -73,6 +73,7 @@ const Dashboard = ({ user }) => {
             <CreditCard 
               balance={financialData.balance} 
               theme={financialData.theme}
+              currency={financialData.currency}
               cardInfo={{
                 bankName: "VEYRA BANK",
                 holderName: financialData.holderName
